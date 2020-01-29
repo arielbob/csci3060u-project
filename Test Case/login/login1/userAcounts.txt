@@ -1,2 +1,2 @@
-goodusername AA 00110.00
-niceusername FS 00200.00
+User001 AA 00110.00
+User002 FS 00200.00
