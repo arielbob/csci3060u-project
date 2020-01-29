@@ -4,5 +4,5 @@ Welcome to CBay Ticket Sale System!
 Please enter a transaction:
 Please enter your username:
 
-Username does not exist!
+Error: Username does not exist!
 Please enter your username:
