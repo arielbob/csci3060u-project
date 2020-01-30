@@ -4,9 +4,12 @@ Please enter your username:
 Logged in.
 [OK] available items file
 
-Welcome buyer
+Welcome admin
 Please enter a transaction:
-Error: Transaction not permitted for your user type.
+Please enter the buyer's name:
+Please enter the seller's username:
+Please enter the amount to refund:
+Error: Amount to refund must be greater than zero!
 Please enter a transaction:
 
 Session terminated.

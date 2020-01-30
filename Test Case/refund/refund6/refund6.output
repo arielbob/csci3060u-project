@@ -1,0 +1,17 @@
+Welcome to CBay Auctioning System!
+Please enter a transaction:
+Please enter your username:
+Logged in.
+[OK] available items file
+
+Welcome admin
+Please enter a transaction:
+Please enter the buyer's name:
+Error: User is not of type buy-standard.
+Please enter a transaction:
+Please enter the buyer's name:
+Please enter the seller's username:
+Error: User is not of type sell-standard.
+Please enter a transaction:
+
+Session terminated.
