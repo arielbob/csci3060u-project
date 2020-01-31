@@ -1,0 +1,18 @@
+Welcome to CBay Auctioning System!
+Please enter a transaction:
+Please enter your username:
+Logged in.
+[OK] available items file
+
+Welcome admin
+Please enter a transaction:
+Please enter the username to add credit to:
+Please enter the amount to add:
+Credit added!
+Please enter a transaction:
+Please enter the username to add credit to:
+Please enter the amount to add:
+Error: Maximum session credit allowance ($1000.00) reached!
+Please enter a transaction:
+
+Session terminated.

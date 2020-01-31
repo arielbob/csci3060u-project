@@ -1,0 +1,14 @@
+Welcome to CBay Auctioning System!
+Please enter a transaction:
+Please enter your username:
+Logged in.
+[OK] available items file
+
+Welcome admin
+Please enter a transaction:
+Please enter the username to add credit to:
+Please enter the amount to add:
+Error: Amount to add must be greater than zero!
+Please enter a transaction:
+
+Session terminated.
