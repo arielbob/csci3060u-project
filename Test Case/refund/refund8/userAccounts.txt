@@ -1,0 +1,4 @@
+seller          FS 000100.00
+buyer           FS 999999.00
+admin           AA 000400.00
+END                         
