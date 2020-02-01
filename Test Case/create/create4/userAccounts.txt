@@ -1,0 +1,3 @@
+Admin                AA 000000
+goodusername  AA 000000
+END
