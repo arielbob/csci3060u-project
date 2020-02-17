@@ -180,23 +180,11 @@ int delete_account(map<string, User*>* users){//screw this one
         cout <<"Error, username could not found \n";
         return 2;
     } else{
-        ofstream accountfile;
-        accountfile.open("userAccounts.txt");
-
-        for (it = users->begin(); it!=users->end(); ++it){
-            if (it->second->username == username){
-                cout<<"runed ";
-                continue;
-            }
-            accountfile << it->second->toString() << '\n';
-        }
-        accountfile <<"END";
-        accountfile.close();
         cout <<"Account Delete Successful! \n";
         return 0;
     }
 
-    return 0;
+    return 1;
 }
 
 int create_account(map<string, User*>* users){//hell screw the END
@@ -234,17 +222,7 @@ int create_account(map<string, User*>* users){//hell screw the END
         return 3;
     }
     //end of testing usertpye
-    User* user = new User(username, usertype);
 
-    ofstream accountfile;
-    accountfile.open("userAccounts.txt");
-
-    for (it = users->begin(); it!=users->end(); ++it){
-        accountfile << it->second->toString() << '\n';
-    }
-    accountfile <<user->toString() <<'\n';
-    accountfile <<"END";
-    accountfile.close();
     cout <<"Account Create Successful! \n";
     return 0;
 }
