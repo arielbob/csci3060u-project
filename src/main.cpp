@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 #include <cstdlib>
-#include "user.h"
+#include "user/user.h"
 #include "accountsfile.h"
 #include "transactionfile.h"
 

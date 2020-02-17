@@ -3,8 +3,8 @@
 #include <fstream>
 #include <sstream>
 #include "transactionfile.h"
-#include "constants.h"
-#include "util.h"
+#include "../constants.h"
+#include "../util/util.h"
 
 using namespace std;
 

@@ -2,8 +2,8 @@
 #include <string>
 #include <fstream>
 #include "accountsfile.h"
-#include "user.h"
-#include "util.h"
+#include "../user/user.h"
+#include "../util/util.h"
 
 using namespace std;
 
