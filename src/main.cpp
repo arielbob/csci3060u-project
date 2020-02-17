@@ -16,6 +16,7 @@ int create_account(map<string, User*>* users);
 int login(map<string, User*>* users);
 int logout(map<string, User*>* users);
 int delete_account(map<string, User*>* users);
+int add_Credit(map<string, User*>* users);
 
 bool LoginStatus = false;    //loginstatus used for check if it is logged in
 User* currentUser = new User();
@@ -157,6 +158,10 @@ int logout(map<string, User*>* users){ //daily transaction file on working
         return -1;
     }
 
+    cout <<"You have logged out";
+    //
+    //To Do
+    //
     LoginStatus = false;
     return 0;
 }
@@ -183,6 +188,9 @@ int delete_account(map<string, User*>* users){//screw this one
         cout <<"Account Delete Successful! \n";
         return 0;
     }
+    //
+    // TO DO
+    //
 
     return 1;
 }
@@ -224,14 +232,61 @@ int create_account(map<string, User*>* users){//hell screw the END
     //end of testing usertpye
 
     cout <<"Account Create Successful! \n";
+
+    //
+    // TO DO
+    //
     return 0;
 }
 
+int add_Credit(map<string, User*>* users){
+    if(LoginStatus == false){
+        cout <<"Not Logged in" <<endl;
+        return -1;
+    }
+    if(currentUser->user_type != "AA"){
+        cout <<"Error, prohibit to create account \n";
+    }
 
+    string username;
+    float amount = 0;
+    cout <<"Please enter the username to add credit to: ";
+    cin >>username;
+    cout <<"Please enter the amount to add: ";
+    cin >>amount;
+    cout <<"Credit Added ";
 
+    map<string, User*>::iterator it = users->find(username);
+    if(it == users->end()){
+        cout <<"Error: Username does not exist! \n";
+        return 2;
+    } else if(amount > 1000.0){
+        cout <<"Error: Maximum session credit allowance ($1000.00) reached!";
+        return 1;
+    } else if(amount < 0){
+        cout <<"Error: Amount to add must be greater than zero!";
+        return 3;
+    } else if((it -> second -> credit + amount) > 999999.99){
+        cout <<"Error: Resulting funds exceed limit in users's account.";
+        return 4;
+    } else{
+        cout <<"Error: unknow error, please contact us at XXX-XXX-XXXX";
+        return 5;
+    }
+    cout <<"Credit added!";
+        return 0;
+    //
+    // TO DO
+    //
+}
+
+void init(){
+    system("clear");
+}
 
 
 int main() {
+    //init()
     map<string, User*>* users = AccountsFile::read();
     int count = 0;
 
