@@ -17,7 +17,7 @@ int login(map<string, User*>* users);
 int logout(map<string, User*>* users);
 int delete_account(map<string, User*>* users);
 
-bool LoginStatus = true;    //loginstatus used for check if it is logged in
+bool LoginStatus = false;    //loginstatus used for check if it is logged in
 User* currentUser = new User();
 
 
@@ -84,22 +84,22 @@ int processTransaction(string transaction,map<string, User*>* users){//it read i
     switch(index){
         case 1:
             login(users);
-            //login function;
+            //login function check mark worked
             break;
 
         case 2:
             logout(users);
-            //logout function;
+            //logout function check mark worked
             break;
 
         case 3:
-            //create functions;
+            //create functions check mark worked
             create_account(users);
             break;
 
         case 4:
-            cout << "Entered Delete" <<endl;
-            //delete functions
+            delete_account(users);
+            //delete functions check mark worked
             break;
 
         case 5:
@@ -145,6 +145,7 @@ int login(map<string, User*>* users){  //not put a checker yet
     }else{
         currentUser = it->second;
         LoginStatus = true;
+        cout <<"You are Logged in as Admin Account";
     }
 
     return 0;
@@ -165,11 +166,35 @@ int delete_account(map<string, User*>* users){//screw this one
         cout <<"Not Logged in" <<endl;
         return -1;
     }
+    if(currentUser->user_type != "AA"){
+        cout <<"Error, prohibit to delete account \n";
+    }
 
     string username;
 
-    cout <<"Please enter the username: " <<endl;
+    cout <<"Please enter the username: ";
     cin >> username;
+
+    map<string, User*>::iterator it = users->find(username);
+    if(it == users->end()){
+        cout <<"Error, username could not found \n";
+        return 2;
+    } else{
+        ofstream accountfile;
+        accountfile.open("userAccounts.txt");
+
+        for (it = users->begin(); it!=users->end(); ++it){
+            if (it->second->username == username){
+                cout<<"runed ";
+                continue;
+            }
+            accountfile << it->second->toString() << '\n';
+        }
+        accountfile <<"END";
+        accountfile.close();
+        cout <<"Account Delete Successful! \n";
+        return 0;
+    }
 
     return 0;
 }
@@ -178,6 +203,9 @@ int create_account(map<string, User*>* users){//hell screw the END
     if(LoginStatus == false){
         cout <<"Not Logged in" <<endl;
         return -1;
+    }
+    if(currentUser->user_type != "AA"){
+        cout <<"Error, prohibit to create account \n";
     }
 
     string username;
@@ -211,7 +239,7 @@ int create_account(map<string, User*>* users){//hell screw the END
     ofstream accountfile;
     accountfile.open("userAccounts.txt");
 
-    for (map<string, User*>::iterator it = users->begin(); it!=users->end(); ++it){
+    for (it = users->begin(); it!=users->end(); ++it){
         accountfile << it->second->toString() << '\n';
     }
     accountfile <<user->toString() <<'\n';
