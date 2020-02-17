@@ -4,6 +4,7 @@
 #include <string>
 #include <cstdlib>
 #include "user.h"
+#include "transactionfile.h"
 
 using namespace std;
 
@@ -25,7 +26,7 @@ User* currentUser = new User();
 string trim_str(string str) {
     int start = -1;
     int end = -1;
-    for (int i = 0; i < str.size(); i++) {
+    for (unsigned int i = 0; i < str.size(); i++) {
         if (start < 0 && str[i] != ' ') start = i;
         if (str[i] != ' ') end = i + 1;
     }
@@ -66,6 +67,8 @@ class AccountsFile {
                 User* user = new User(username, user_type, credit);
                 users->insert(pair<string, User*>(username, user));
             }
+
+            in.close();
 
             return users;
         }
@@ -289,6 +292,7 @@ int main() {
     //init()
     map<string, User*>* users = AccountsFile::read();
     int count = 0;
+    TransactionFile transFile;
 
     while(1){
         string transaction;

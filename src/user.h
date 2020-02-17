@@ -15,7 +15,7 @@ class User {
         /**
         * Creates a User object
         */
-        User(){};
+        User();
         User(std::string username, std::string user_type, double credit);
         User(std::string username, std::string user_type);
         std::string toString();
