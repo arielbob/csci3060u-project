@@ -14,8 +14,8 @@ using namespace std;
 */
 int create_account(map<string, User*>* users);
 int login(map<string, User*>* users);
-int logout();
-int delete_account();
+int logout(map<string, User*>* users);
+int delete_account(map<string, User*>* users);
 
 bool LoginStatus = true;    //loginstatus used for check if it is logged in
 User* currentUser = new User();
@@ -88,7 +88,7 @@ int processTransaction(string transaction,map<string, User*>* users){//it read i
             break;
 
         case 2:
-            logout();
+            logout(users);
             //logout function;
             break;
 
@@ -132,6 +132,10 @@ int processTransaction(string transaction,map<string, User*>* users){//it read i
 //need to pass one more argument user, so we can check the user typecheck if the current user is the Admin account.
 
 int login(map<string, User*>* users){  //not put a checker yet
+    if(LoginStatus == true){
+        cout <<"Already Logged in" <<endl;
+        return -2;
+    }
     string username;
     cout <<"Please enter your username: ";
     cin >> username;
@@ -146,7 +150,7 @@ int login(map<string, User*>* users){  //not put a checker yet
     return 0;
 }
 
-int logout(){ //daily transaction file on working
+int logout(map<string, User*>* users){ //daily transaction file on working
     if(LoginStatus == false){
         cout <<"Not Logged in" <<endl;
         return -1;
@@ -156,7 +160,7 @@ int logout(){ //daily transaction file on working
     return 0;
 }
 
-int delete_account(){//screw this one
+int delete_account(map<string, User*>* users){//screw this one
     if(LoginStatus == false){
         cout <<"Not Logged in" <<endl;
         return -1;
@@ -189,11 +193,10 @@ int create_account(map<string, User*>* users){//hell screw the END
 
     map<string, User*>::iterator it = users->find(username);
     if(it == users->end()){
-        cout <<"Error, Username already benn taken \n";
+    } else{
+        cout <<"Error, username Already been take \n";
         return 2;
     }
-
-
 
     //end of testing username
     cout <<"Please enter the usertype: ";
@@ -206,15 +209,18 @@ int create_account(map<string, User*>* users){//hell screw the END
     User* user = new User(username, usertype);
 
     ofstream accountfile;
-    accountfile.open("userAccounts.txt", ios::app);
+    accountfile.open("userAccounts.txt");
+
+    for (map<string, User*>::iterator it = users->begin(); it!=users->end(); ++it){
+        accountfile << it->second->toString() << '\n';
+    }
+    accountfile <<user->toString() <<'\n';
+    accountfile <<"END";
+    accountfile.close();
     cout <<"Account Create Successful! \n";
-    accountfile <<endl <<user->toString() <<endl <<"END";
     return 0;
 }
 
-int dailytransaction(){
-
-}
 
 
 
