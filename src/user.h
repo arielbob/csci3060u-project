@@ -17,20 +17,8 @@ class User {
         */
         User(){};
         User(std::string username, std::string user_type, double credit);
-        User(std::string username, std::string user_type){
-            this->username = username;
-            this->user_type = user_type;
-            this-> credit = 0.0f;
-        };
-        std::string toString(){
-            std::string buffer;
-            buffer = this->username;
-            buffer.append((15 - username.size()),' ');
-            buffer.append(user_type);
-            buffer.append(" ");
-            buffer.append(std::to_string(credit));
-            return buffer;
-        };
+        User(std::string username, std::string user_type);
+        std::string toString();
 };
 
 #endif
