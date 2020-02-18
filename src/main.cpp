@@ -17,6 +17,10 @@ int login(map<string, User*>* users);
 int logout(map<string, User*>* users);
 int delete_account(map<string, User*>* users);
 int add_Credit(map<string, User*>* users);
+int refund(map<string, User*>* users);
+int LoginCheck();
+int Advertise(map<string, User*>* users);
+int Bid(map<string, User*>* users);
 
 bool LoginStatus = false;    //loginstatus used for check if it is logged in
 User* currentUser = new User();
@@ -104,22 +108,22 @@ int processTransaction(string transaction,map<string, User*>* users){//it read i
             break;
 
         case 5:
-            cout << "Entered Advertise" <<endl;
+            Advertise(users);
             //advertise functions
             break;
 
         case 6:
-            cout << "Entered Bid" <<endl;
+            Bid(users);
             //bid function
             break;
 
         case 7:
-            cout << "Entered Refund" <<endl;
+            refund(users);
             //refund functions
             break;
 
         case 8:
-            cout << "Entered Add Credit" <<endl;
+            add_Credit(users);
             //add creidt functions
             break;
 
@@ -135,7 +139,7 @@ int processTransaction(string transaction,map<string, User*>* users){//it read i
 int login(map<string, User*>* users){  //not put a checker yet
     if(LoginStatus == true){
         cout <<"Already Logged in" <<endl;
-        return -2;
+        return -3;
     }
     string username;
     cout <<"Please enter your username: ";
@@ -146,33 +150,28 @@ int login(map<string, User*>* users){  //not put a checker yet
     }else{
         currentUser = it->second;
         LoginStatus = true;
-        cout <<"You are Logged in as Admin Account";
+        cout <<"You are Logged in";
     }
 
     return 0;
 }
 
 int logout(map<string, User*>* users){ //daily transaction file on working
-    if(LoginStatus == false){
-        cout <<"Not Logged in" <<endl;
-        return -1;
-    }
+    LoginCheck();
 
     cout <<"You have logged out";
     //
-    //To Do
+    //TODO Logout transaction;
     //
     LoginStatus = false;
     return 0;
 }
 
 int delete_account(map<string, User*>* users){//screw this one
-    if(LoginStatus == false){
-        cout <<"Not Logged in" <<endl;
-        return -1;
-    }
+    LoginCheck();
     if(currentUser->user_type != "AA"){
         cout <<"Error, prohibit to delete account \n";
+        return -2;
     }
 
     string username;
@@ -189,19 +188,17 @@ int delete_account(map<string, User*>* users){//screw this one
         return 0;
     }
     //
-    // TO DO
+    // TODO delete transaction
     //
 
     return 1;
 }
 
 int create_account(map<string, User*>* users){//hell screw the END
-    if(LoginStatus == false){
-        cout <<"Not Logged in" <<endl;
-        return -1;
-    }
+    LoginCheck();
     if(currentUser->user_type != "AA"){
         cout <<"Error, prohibit to create account \n";
+        return -2;
     }
 
     string username;
@@ -234,18 +231,105 @@ int create_account(map<string, User*>* users){//hell screw the END
     cout <<"Account Create Successful! \n";
 
     //
-    // TO DO
+    // TODO
     //
     return 0;
 }
 
-int add_Credit(map<string, User*>* users){
-    if(LoginStatus == false){
-        cout <<"Not Logged in" <<endl;
-        return -1;
-    }
+int refund(map<string, User*>* users){
+    LoginCheck();
     if(currentUser->user_type != "AA"){
-        cout <<"Error, prohibit to create account \n";
+        cout <<"Error, prohibit to process refund \n";
+        return -2;
+    }
+
+    string buyer;
+    string seller;
+    double amount;
+
+    cout <<"Please enter the buyer's name: ";
+    cin >>buyer;
+    map<string, User*>::iterator buyerit = users->find(buyer);
+    if(buyerit == users->end()){
+        cout <<"Error: Username does not exist! \n";
+        return 2;
+    } else if(buyerit ->second -> user_type == "SS"){
+        cout <<"Error: User is not of type buy-standard. \n";
+        return 1;
+    }
+    cout <<"Please enter the seller's username: ";
+    cin >>seller;
+    map<string, User*>::iterator sellerit = users->find(seller);
+    if(sellerit == users->end()){
+        cout <<"Error: Username does not exist! \n";
+        return 2;
+    }else if(sellerit -> second -> user_type == "SS"){
+        cout <<"Error: User is not of type sell-standard.\n";
+        return 1;
+    }
+    cout <<"Please enter the amount to refund: ";
+    cin >>amount;
+    if (amount < 0){
+        cout <<"Error: Amount to refund must be greater than zero!";
+        return 3;
+    } else if((sellerit -> second ->credit + amount) >999999.99){
+        cout <<"Error: Resulting funds exceed limit in seller's account. \n";
+        return 4;
+    } else if(sellerit -> second ->credit < amount){
+        cout <<"Error: Seller has insufficient funds for refund. \n";
+        return 5;
+    }
+    //
+    //TODO refund
+    //
+
+    cout <<"Refund Successful! \n";
+    return 0;
+}
+
+int Advertise(map<string, User*>* users){
+    LoginCheck();
+    if(currentUser->user_type != "FS" && currentUser->user_type != "BS"){
+        cout <<"Error, prohibit to advertise item \n";
+    }
+    string item;
+    double minbid;
+    int numofdays;
+
+    cout <<"please enter the item to advertise: ";
+    cin >> item;
+    cout <<"please enter the minimum bid for the item: ";
+    cin >>minbid;
+    cout <<"please enter the number of days until the auction end: ";
+    cin >>numofdays;
+
+    return 0;
+}
+
+int Bid(map<string, User*>* users){
+    LoginCheck();
+    if(currentUser->user_type != "BS" && currentUser->user_type != "BS"){
+        cout <<"Error, prohibit to Bid item \n";
+    }
+    string item;
+    string seller;
+    double bid_amount;
+
+
+    cout <<"Please enter the item name: ";
+    cin >> item;
+    cout <<"Please enter the seller's username: ";
+    cin >>seller;
+    cout <<"Current highest bid for guitar: $300.00 \n";
+    cout <<"Please enter a new bid amount: ";
+    cin >>bid_amount;
+}
+
+int add_Credit(map<string, User*>* users){
+    LoginCheck();
+    if(currentUser->user_type != "AA"){
+        cout <<"Error, prohibit to Add Credit \n";
+        return -2;
     }
 
     string username;
@@ -261,32 +345,38 @@ int add_Credit(map<string, User*>* users){
         cout <<"Error: Username does not exist! \n";
         return 2;
     } else if(amount > 1000.0){
-        cout <<"Error: Maximum session credit allowance ($1000.00) reached!";
+        cout <<"Error: Maximum session credit allowance ($1000.00) reached! \n";
         return 1;
     } else if(amount < 0){
-        cout <<"Error: Amount to add must be greater than zero!";
+        cout <<"Error: Amount to add must be greater than zero! \n";
         return 3;
     } else if((it -> second -> credit + amount) > 999999.99){
-        cout <<"Error: Resulting funds exceed limit in users's account.";
+        cout <<"Error: Resulting funds exceed limit in users's account. \n";
         return 4;
     } else{
-        cout <<"Error: unknow error, please contact us at XXX-XXX-XXXX";
+        cout <<"Error: unknow error, please contact us at XXX-XXX-XXXX \n";
         return 5;
     }
-    cout <<"Credit added!";
+    cout <<"Credit added! \n";
         return 0;
     //
-    // TO DO
+    // TODO addcredit
     //
+}
+
+int LoginCheck(){
+    if(LoginStatus == false){
+        cout <<"Not Logged in" <<endl;
+        return -1;
+    }
 }
 
 void init(){
     system("clear");
 }
 
-
 int main() {
-    //init()
+    init();
     map<string, User*>* users = AccountsFile::read();
     int count = 0;
 
@@ -299,6 +389,5 @@ int main() {
         cout <<endl;
 
     }
-    //cout << "Entered " << transaction << endl;
     return 0;
 }
