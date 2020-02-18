@@ -8,13 +8,13 @@ User::User() {}
 User::User(string username, string user_type, double credit) {
     this->username = username;
     this->user_type = user_type;
-    this-> credit = credit;
+    this->credit = credit;
 }
 
 User::User(std::string username, std::string user_type){
     this->username = username;
     this->user_type = user_type;
-    this-> credit = 0.0f;
+    this->credit = 0.0f;
 };
 
 std::string User::toString(){

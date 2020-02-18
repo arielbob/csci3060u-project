@@ -11,8 +11,8 @@ using namespace std;
 * Parses the accounts file and returns a generated users map from its contents
 * @return The generated users map
 */
-map<string, User*>* AccountsFile::read() {
-    map<string, User*>* users = new map<string, User*>();
+map<string, User*> AccountsFile::read() {
+    map<string, User*> users;
 
     ifstream in("userAccounts.txt");
     string line;
@@ -28,7 +28,7 @@ map<string, User*>* AccountsFile::read() {
 
         // insert new User object into map
         User* user = new User(username, user_type, credit);
-        users->insert(pair<string, User*>(username, user));
+        users.insert(pair<string, User*>(username, user));
     }
 
     in.close();

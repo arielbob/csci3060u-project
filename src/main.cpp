@@ -4,21 +4,23 @@
 #include <string>
 #include <cstdlib>
 #include "user/user.h"
-#include "accountsfile.h"
-#include "transactionfile.h"
+#include "item/item.h"
+#include "accountsfile/accountsfile.h"
+#include "itemsfile/itemsfile.h"
+#include "transactionfile/transactionfile.h"
 
 using namespace std;
 
-int create_account(map<string, User*>* users);
-int login(map<string, User*>* users);
-int logout(map<string, User*>* users);
-int delete_account(map<string, User*>* users);
-int add_Credit(map<string, User*>* users);
+int create_account(map<string, User*> users);
+int login(map<string, User*> users);
+int logout(map<string, User*> users);
+int delete_account(map<string, User*> users);
+int add_Credit(map<string, User*> users);
 
 bool LoginStatus = false;    //loginstatus used for check if it is logged in
 User* currentUser = new User();
 
-int processTransaction(string transaction,map<string, User*>* users){//it read in the User input and process to different cases
+int processTransaction(string transaction, map<string, User*> users){//it read in the User input and process to different cases
     string transactions[9] = {"Login","Logout","Create","Delete","Advertise","Bid","Refund","Add Credit"};
     int index = 0;
 
@@ -79,7 +81,7 @@ int processTransaction(string transaction,map<string, User*>* users){//it read i
 //use int so i can have a check if the return value is correct it is a basic version of delete.
 //need to pass one more argument user, so we can check the user typecheck if the current user is the Admin account.
 
-int login(map<string, User*>* users){  //not put a checker yet
+int login(map<string, User*> users){  //not put a checker yet
     if(LoginStatus == true){
         cout <<"Already Logged in" <<endl;
         return -2;
@@ -87,8 +89,8 @@ int login(map<string, User*>* users){  //not put a checker yet
     string username;
     cout <<"Please enter your username: ";
     cin >> username;
-    map<string, User*>::iterator it = users->find(username);
-    if(it == users->end()){
+    map<string, User*>::iterator it = users.find(username);
+    if(it == users.end()){
         cout <<"Error, username not found";
     }else{
         currentUser = it->second;
@@ -99,7 +101,7 @@ int login(map<string, User*>* users){  //not put a checker yet
     return 0;
 }
 
-int logout(map<string, User*>* users){ //daily transaction file on working
+int logout(map<string, User*> users){ //daily transaction file on working
     if(LoginStatus == false){
         cout <<"Not Logged in" <<endl;
         return -1;
@@ -113,7 +115,7 @@ int logout(map<string, User*>* users){ //daily transaction file on working
     return 0;
 }
 
-int delete_account(map<string, User*>* users){//screw this one
+int delete_account(map<string, User*> users){//screw this one
     if(LoginStatus == false){
         cout <<"Not Logged in" <<endl;
         return -1;
@@ -127,8 +129,8 @@ int delete_account(map<string, User*>* users){//screw this one
     cout <<"Please enter the username: ";
     cin >> username;
 
-    map<string, User*>::iterator it = users->find(username);
-    if(it == users->end()){
+    map<string, User*>::iterator it = users.find(username);
+    if(it == users.end()){
         cout <<"Error, username could not found \n";
         return 2;
     } else{
@@ -142,7 +144,7 @@ int delete_account(map<string, User*>* users){//screw this one
     return 1;
 }
 
-int create_account(map<string, User*>* users){//hell screw the END
+int create_account(map<string, User*> users){//hell screw the END
     if(LoginStatus == false){
         cout <<"Not Logged in" <<endl;
         return -1;
@@ -162,8 +164,8 @@ int create_account(map<string, User*>* users){//hell screw the END
         return 1;
     }
 
-    map<string, User*>::iterator it = users->find(username);
-    if(it == users->end()){
+    map<string, User*>::iterator it = users.find(username);
+    if(it == users.end()){
     } else{
         cout <<"Error, username Already been take \n";
         return 2;
@@ -186,7 +188,7 @@ int create_account(map<string, User*>* users){//hell screw the END
     return 0;
 }
 
-int add_Credit(map<string, User*>* users){
+int add_Credit(map<string, User*> users){
     if(LoginStatus == false){
         cout <<"Not Logged in" <<endl;
         return -1;
@@ -203,8 +205,8 @@ int add_Credit(map<string, User*>* users){
     cin >>amount;
     cout <<"Credit Added ";
 
-    map<string, User*>::iterator it = users->find(username);
-    if(it == users->end()){
+    map<string, User*>::iterator it = users.find(username);
+    if(it == users.end()){
         cout <<"Error: Username does not exist! \n";
         return 2;
     } else if(amount > 1000.0){
@@ -233,7 +235,9 @@ void init(){
 
 int main() {
     //init()
-    map<string, User*>* users = AccountsFile::read();
+    map<string, User*> users = AccountsFile::read();
+    map<pair<string, string>, Item*> items = ItemsFile::read(users);
+
     int count = 0;
     TransactionFile transFile;
 

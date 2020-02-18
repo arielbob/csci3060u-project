@@ -14,7 +14,7 @@ class AccountsFile {
         * Parses the accounts file and returns a generated users map from its contents
         * @return The generated users map
         */
-        static std::map<std::string, User*>* read();
+        static std::map<std::string, User*> read();
 };
 
 #endif
