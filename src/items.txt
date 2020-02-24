@@ -1,6 +1,2 @@
-<<<<<<< HEAD
 guitar              seller          oldbuyer       007 300.00
-=======
-coat                user            admin           010 600.00
->>>>>>> f0fc6202fb394291d544c2e3e0c90a5950e85250
 END                                                          

@@ -3,7 +3,8 @@
 #include <map>
 #include <string>
 #include <cstdlib>
-#include "user.h"
+#include "user/user.h"
+#include "accountsfile/accountsfile.h"
 
 using namespace std;
 
@@ -12,15 +13,15 @@ using namespace std;
 * @param str String to be trimmed
 * @return The trimmed string
 */
-int create_account(map<string, User*>* users);
-int login(map<string, User*>* users);
-int logout(map<string, User*>* users);
-int delete_account(map<string, User*>* users);
-int add_Credit(map<string, User*>* users);
-int refund(map<string, User*>* users);
+int create_account(map<string, User*> users);
+int login(map<string, User*> users);
+int logout(map<string, User*> users);
+int delete_account(map<string, User*> users);
+int add_Credit(map<string, User*> users);
+int refund(map<string, User*> users);
 int LoginCheck();
-int Advertise(map<string, User*>* users);
-int Bid(map<string, User*>* users);
+int Advertise(map<string, User*> users);
+int Bid(map<string, User*> users);
 
 bool LoginStatus = false;    //loginstatus used for check if it is logged in
 User* currentUser = new User();
@@ -42,40 +43,7 @@ string trim_str(string str) {
     }
 }
 
-/**
-* Class to read users file and generate users map
-*/
-class AccountsFile {
-    public:
-        /**
-        * Parses the accounts file and returns a generated users map from its contents
-        * @return The generated users map
-        */
-        static map<string, User*>* read() {
-            map<string, User*>* users = new map<string, User*>();
-
-            ifstream in("userAccounts.txt");
-            string line;
-
-            // loop through accounts file line by line
-            while(getline(in, line)) {
-                string username = trim_str(line.substr(0, 15));
-                if (username == "END") break;
-                string user_type = trim_str(line.substr(16, 2));
-                string credit_str = line.substr(19, 9);
-
-                double credit = atof(credit_str.c_str());
-
-                // insert new User object into map
-                User* user = new User(username, user_type, credit);
-                users->insert(pair<string, User*>(username, user));
-            }
-
-            return users;
-        }
-};
-
-int processTransaction(string transaction,map<string, User*>* users){//it read in the User input and process to different cases
+int processTransaction(string transaction,map<string, User*> users){//it read in the User input and process to different cases
     string transactions[9] = {"Login","Logout","Create","Delete","Advertise","Bid","Refund","Add Credit"};
     int index = 0;
 
@@ -136,7 +104,7 @@ int processTransaction(string transaction,map<string, User*>* users){//it read i
 //use int so i can have a check if the return value is correct it is a basic version of delete.
 //need to pass one more argument user, so we can check the user typecheck if the current user is the Admin account.
 
-int login(map<string, User*>* users){  //not put a checker yet
+int login(map<string, User*> users){  //not put a checker yet
     if(LoginStatus == true){
         cout <<"Already Logged in" <<endl;
         return -3;
@@ -144,8 +112,8 @@ int login(map<string, User*>* users){  //not put a checker yet
     string username;
     cout <<"Please enter your username: ";
     cin >> username;
-    map<string, User*>::iterator it = users->find(username);
-    if(it == users->end()){
+    map<string, User*>::iterator it = users.find(username);
+    if(it == users.end()){
         cout <<"Error, username not found";
     }else{
         currentUser = it->second;
@@ -156,7 +124,7 @@ int login(map<string, User*>* users){  //not put a checker yet
     return 0;
 }
 
-int logout(map<string, User*>* users){ //daily transaction file on working
+int logout(map<string, User*> users){ //daily transaction file on working
     LoginCheck();
 
     cout <<"You have logged out";
@@ -167,7 +135,7 @@ int logout(map<string, User*>* users){ //daily transaction file on working
     return 0;
 }
 
-int delete_account(map<string, User*>* users){//screw this one
+int delete_account(map<string, User*> users){//screw this one
     LoginCheck();
     if(currentUser->user_type != "AA"){
         cout <<"Error, prohibit to delete account \n";
@@ -179,8 +147,8 @@ int delete_account(map<string, User*>* users){//screw this one
     cout <<"Please enter the username: ";
     cin >> username;
 
-    map<string, User*>::iterator it = users->find(username);
-    if(it == users->end()){
+    map<string, User*>::iterator it = users.find(username);
+    if(it == users.end()){
         cout <<"Error, username could not found \n";
         return 2;
     } else{
@@ -194,7 +162,7 @@ int delete_account(map<string, User*>* users){//screw this one
     return 1;
 }
 
-int create_account(map<string, User*>* users){//hell screw the END
+int create_account(map<string, User*> users){//hell screw the END
     LoginCheck();
     if(currentUser->user_type != "AA"){
         cout <<"Error, prohibit to create account \n";
@@ -212,8 +180,8 @@ int create_account(map<string, User*>* users){//hell screw the END
         return 1;
     }
 
-    map<string, User*>::iterator it = users->find(username);
-    if(it == users->end()){
+    map<string, User*>::iterator it = users.find(username);
+    if(it == users.end()){
     } else{
         cout <<"Error, username Already been take \n";
         return 2;
@@ -236,7 +204,7 @@ int create_account(map<string, User*>* users){//hell screw the END
     return 0;
 }
 
-int refund(map<string, User*>* users){
+int refund(map<string, User*> users){
     LoginCheck();
     if(currentUser->user_type != "AA"){
         cout <<"Error, prohibit to process refund \n";
@@ -249,8 +217,8 @@ int refund(map<string, User*>* users){
 
     cout <<"Please enter the buyer's name: ";
     cin >>buyer;
-    map<string, User*>::iterator buyerit = users->find(buyer);
-    if(buyerit == users->end()){
+    map<string, User*>::iterator buyerit = users.find(buyer);
+    if(buyerit == users.end()){
         cout <<"Error: Username does not exist! \n";
         return 2;
     } else if(buyerit ->second -> user_type == "SS"){
@@ -259,8 +227,8 @@ int refund(map<string, User*>* users){
     }
     cout <<"Please enter the seller's username: ";
     cin >>seller;
-    map<string, User*>::iterator sellerit = users->find(seller);
-    if(sellerit == users->end()){
+    map<string, User*>::iterator sellerit = users.find(seller);
+    if(sellerit == users.end()){
         cout <<"Error: Username does not exist! \n";
         return 2;
     }else if(sellerit -> second -> user_type == "SS"){
@@ -287,7 +255,7 @@ int refund(map<string, User*>* users){
     return 0;
 }
 
-int Advertise(map<string, User*>* users){
+int Advertise(map<string, User*> users){
     LoginCheck();
     if(currentUser->user_type != "FS" && currentUser->user_type != "BS"){
         cout <<"Error, prohibit to advertise item \n";
@@ -306,7 +274,7 @@ int Advertise(map<string, User*>* users){
     return 0;
 }
 
-int Bid(map<string, User*>* users){
+int Bid(map<string, User*> users){
     LoginCheck();
     if(currentUser->user_type != "BS" && currentUser->user_type != "BS"){
         cout <<"Error, prohibit to Bid item \n";
@@ -325,7 +293,7 @@ int Bid(map<string, User*>* users){
     cin >>bid_amount;
 }
 
-int add_Credit(map<string, User*>* users){
+int add_Credit(map<string, User*> users){
     LoginCheck();
     if(currentUser->user_type != "AA"){
         cout <<"Error, prohibit to Add Credit \n";
@@ -340,8 +308,8 @@ int add_Credit(map<string, User*>* users){
     cin >>amount;
     cout <<"Credit Added ";
 
-    map<string, User*>::iterator it = users->find(username);
-    if(it == users->end()){
+    map<string, User*>::iterator it = users.find(username);
+    if(it == users.end()){
         cout <<"Error: Username does not exist! \n";
         return 2;
     } else if(amount > 1000.0){
@@ -377,7 +345,7 @@ void init(){
 
 int main() {
     init();
-    map<string, User*>* users = AccountsFile::read();
+    map<string, User*> users = AccountsFile::read();
     int count = 0;
 
     while(1){
