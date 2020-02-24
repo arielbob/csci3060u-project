@@ -10,6 +10,7 @@ using namespace std;
 
 /**
 * Parses the items file and returns a generated items map from its contents
+* @param users The users map
 * @return The generated items map
 */
 map<pair<string, string>, Item*> ItemsFile::read(map<string, User*> users) {

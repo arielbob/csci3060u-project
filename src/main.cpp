@@ -1,4 +1,5 @@
 #include <iostream>
+#include <climits>
 #include <fstream>
 #include <map>
 #include <string>
@@ -26,24 +27,8 @@ int Bid(map<string, User*> users);
 bool LoginStatus = false;    //loginstatus used for check if it is logged in
 User* currentUser = new User();
 
-
-string trim_str(string str) {
-    int start = -1;
-    int end = -1;
-    for (int i = 0; i < str.size(); i++) {
-        if (start < 0 && str[i] != ' ') start = i;
-        if (str[i] != ' ') end = i + 1;
-    }
-    int len = end - start;
-
-    if (start > -1) {
-        return str.substr(start, len);
-    } else {
-        return str;
-    }
-}
-
 int processTransaction(string transaction,map<string, User*> users){//it read in the User input and process to different cases
+    cout << "PARSING TRANSACTION: " << transaction << endl;
     string transactions[9] = {"Login","Logout","Create","Delete","Advertise","Bid","Refund","Add Credit"};
     int index = 0;
 
@@ -111,7 +96,7 @@ int login(map<string, User*> users){  //not put a checker yet
     }
     string username;
     cout <<"Please enter your username: ";
-    cin >> username;
+    getline(cin, username);
     map<string, User*>::iterator it = users.find(username);
     if(it == users.end()){
         cout <<"Error, username not found";
@@ -352,10 +337,12 @@ int main() {
         string transaction;
         cout << "Welcome to CBay Auctioning System!" << endl;
         cout << "Please enter a transaction: ";
-        getline(cin, transaction);        // i changed it to getline os it can reading one line of transaction so Add Credit can be read
-        processTransaction(transaction,users);
+        // i changed it to getline os it can reading one line of transaction so Add Credit can be read
+        // cout << "transaction entered: " << transaction << endl;
+        if (getline(cin, transaction)) {
+            processTransaction(transaction,users);
+        }
         cout <<endl;
-
     }
     return 0;
 }
