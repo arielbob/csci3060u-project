@@ -41,4 +41,50 @@ class CreateTransaction {
         static int execute(User* user, std::map<std::string, User*> users);
 };
 
+// -----------
+
+/**
+* Class to represent a delete transaction
+*/
+class DeleteTransaction {
+    public:
+        static bool verify(User* user);
+        static int execute(User* user, std::map<std::string, User*> users);
+};
+
+/**
+* Class to represent an advertise transaction
+*/
+// class Transaction {
+//     public:
+//         static bool verify(User* user);
+//         static int execute(User* user, std::map<std::string, User*> users);
+// };
+
+// /**
+// * Class to represent a bid transaction
+// */
+// class Transaction {
+//     public:
+//         static bool verify(User* user);
+//         static int execute(User* user, std::map<std::string, User*> users);
+// };
+
+// /**
+// * Class to represent a refund transaction
+// */
+// class Transaction {
+//     public:
+//         static bool verify(User* user);
+//         static int execute(User* user, std::map<std::string, User*> users);
+// };
+
+// /**
+// * Class to represent an add credit transaction
+// */
+// class Transaction {
+//     public:
+//         static bool verify(User* user);
+//         static int execute(User* user, std::map<std::string, User*> users);
+// };
 #endif

@@ -20,7 +20,6 @@ using namespace std;
 * @param str String to be trimmed
 * @return The trimmed string
 */
-int delete_account(map<string, User*> users);
 int add_Credit(map<string, User*> users);
 int refund(map<string, User*> users);
 int advertise(map<string, User*> users, map<pair<string, string>, Item*> items);
@@ -53,12 +52,7 @@ int processTransaction(string transaction,map<string, User*> users, map<pair<str
             break;
 
         case 4:
-            if(currentUser == NULL){
-                cout <<"Not Logged in" <<endl;
-                return -1;
-            }
-            delete_account(users);
-            //delete functions check mark worked
+            DeleteTransaction::execute(currentUser, users);
             break;
 
         case 5:
@@ -108,32 +102,6 @@ int processTransaction(string transaction,map<string, User*> users, map<pair<str
 }
 //use int so i can have a check if the return value is correct it is a basic version of delete.
 //need to pass one more argument user, so we can check the user typecheck if the current user is the Admin account.
-
-int delete_account(map<string, User*> users){//screw this one
-    if(currentUser->user_type != "AA"){
-        cout <<"Error, prohibit to delete account \n";
-        return -2;
-    }
-
-    string username;
-
-    cout <<"Please enter the username: ";
-        getline(cin, username);
-
-    map<string, User*>::iterator it = users.find(username);
-    if(it == users.end()){
-        cout <<"Error, username could not found \n";
-        return 2;
-    } else{
-        cout <<"Account Delete Successful! \n";
-        return 0;
-    }
-    //
-    // TODO delete transaction
-    //
-
-    return 1;
-}
 
 int refund(map<string, User*> users){
     if(currentUser->user_type != "AA"){
