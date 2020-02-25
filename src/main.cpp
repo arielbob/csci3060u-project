@@ -16,7 +16,6 @@ using namespace std;
 * @return The trimmed string
 */
 int create_account(map<string, User*> users);
-int logout(map<string, User*> users);
 int delete_account(map<string, User*> users);
 int add_Credit(map<string, User*> users);
 int refund(map<string, User*> users);
@@ -43,12 +42,7 @@ int processTransaction(string transaction,map<string, User*> users){//it read in
             break;
 
         case 2:
-            if(currentUser == NULL){
-                cout <<"Not Logged in" <<endl;
-                return -1;
-            }
-            logout(users);
-            //logout function check mark worked
+            LogoutTransaction::execute(currentUser, users);
             break;
 
         case 3:
@@ -116,16 +110,6 @@ int processTransaction(string transaction,map<string, User*> users){//it read in
 }
 //use int so i can have a check if the return value is correct it is a basic version of delete.
 //need to pass one more argument user, so we can check the user typecheck if the current user is the Admin account.
-
-int logout(map<string, User*> users){ //daily transaction file on working
-
-    cout <<"You have logged out \n";
-    //
-    //TODO Logout transaction;
-    //
-    currentUser = NULL;
-    return 0;
-}
 
 int delete_account(map<string, User*> users){//screw this one
     if(currentUser->user_type != "AA"){
