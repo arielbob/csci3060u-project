@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include "../user/user.h"
+#include "../item/item.h"
 
 /**
 * Class to represent a transaction
@@ -41,8 +42,6 @@ class CreateTransaction {
         static int execute(User* user, std::map<std::string, User*> users);
 };
 
-// -----------
-
 /**
 * Class to represent a delete transaction
 */
@@ -55,11 +54,13 @@ class DeleteTransaction {
 /**
 * Class to represent an advertise transaction
 */
-// class Transaction {
-//     public:
-//         static bool verify(User* user);
-//         static int execute(User* user, std::map<std::string, User*> users);
-// };
+class AdvertiseTransaction {
+    public:
+        static bool verify(User* user);
+        static int execute(User* user, std::map<std::string, User*> users, std::map<std::pair<std::string, std::string>, Item*> items);
+};
+
+// -----------
 
 // /**
 // * Class to represent a bid transaction
