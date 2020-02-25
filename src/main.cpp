@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include "user/user.h"
 #include "accountsfile/accountsfile.h"
+#include "transaction/transaction.h"
 
 using namespace std;
 
@@ -39,12 +40,7 @@ int processTransaction(string transaction,map<string, User*> users){//it read in
 
     switch(index){
         case 1:
-            if(currentUser != NULL){
-                cout <<"Already logged in" <<endl;
-                return -1;
-            }
-            login(users);
-            //login function check mark worked
+            LoginTransaction::execute(currentUser, users);
             break;
 
         case 2:
@@ -121,21 +117,6 @@ int processTransaction(string transaction,map<string, User*> users){//it read in
 }
 //use int so i can have a check if the return value is correct it is a basic version of delete.
 //need to pass one more argument user, so we can check the user typecheck if the current user is the Admin account.
-
-int login(map<string, User*> users){  //not put a checker yet
-    string username;
-    cout <<"Please enter your username: ";
-    getline(cin, username);
-    map<string, User*>::iterator it = users.find(username);
-    if(it == users.end()){
-        cout <<"Error, username not found";
-    }else{
-        currentUser = it->second;
-        cout <<"You are Logged in \n";
-    }
-
-    return 0;
-}
 
 int logout(map<string, User*> users){ //daily transaction file on working
 

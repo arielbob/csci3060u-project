@@ -3,23 +3,27 @@ FLAGS = -Wall -g -std=c++11
 VPATH = out # to have make look for target files in out folder
 
 # objects required for final linking
-objects = main.o user.o item.o bid.o transactionfile.o accountsfile.o itemsfile.o util.o
+objects = main.o user.o item.o bid.o transactionfile.o accountsfile.o itemsfile.o util.o login_trans.o
 # prepend object filenames with out/ folder
 # $(patsubst pattern, replacement, text)
 OBJS = $(patsubst %.o, out/%.o, $(objects))
 
 # dependencies required everywhere
 deps = constants.h util/util.h util/util.cpp
+transaction_dep = transaction/transaction.h
 
 # Makefile variables
 # $@: target (ex: main)
 # $^: dependencies (ex: for user.o target - user.cpp, user.h)
 # $<: first dependency (ex: for user.o target - user.cpp)
 
+# make out file
+$(shell mkdir out)
+
 all: main 
 
 clean:
-	rm main out/*.o
+	rm main -r out
 
 main: $(objects)
 	$(CC) $(FLAGS) $(OBJS) -o $@
@@ -43,6 +47,9 @@ accountsfile.o: accountsfile/accountsfile.cpp accountsfile/accountsfile.h $(deps
 	$(CC) -c $(FLAGS) $< -o out/$@
 
 transactionfile.o: transactionfile/transactionfile.cpp transactionfile/transactionfile.h $(deps)
+	$(CC) -c $(FLAGS) $< -o out/$@
+
+login_trans.o: transaction/login_trans.cpp $(transaction_dep) $(deps)
 	$(CC) -c $(FLAGS) $< -o out/$@
 
 main.o: main.cpp $(deps)
