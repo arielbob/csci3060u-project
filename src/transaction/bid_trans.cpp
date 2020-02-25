@@ -20,7 +20,7 @@ bool BidTransaction::verify(User* user) {
     return true;
 }
 
-int BidTransaction::execute(User* current_user, map<string, User*> users, map<pair<string, string>, Item*> items) {
+int BidTransaction::execute(TransactionFile tf, User* current_user, map<string, User*> users, map<pair<string, string>, Item*> items) {
     if (!verify(current_user)) return 1;
 
     string item;

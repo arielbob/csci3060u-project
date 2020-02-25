@@ -8,13 +8,14 @@
 
 using namespace std;
 
-TransactionFile::TransactionFile() {
-    // TODO: add error handling
-    out.open("transactions.txt", ofstream::app);
-}
+ofstream TransactionFile::out;
 
-TransactionFile::~TransactionFile() {
-    out.close();
+/**
+* Open stream to write to transaction file
+* @param filename File name of transaction file
+*/
+void TransactionFile::open(string filename) {
+    out.open(filename, ofstream::app);
 }
 
 /**

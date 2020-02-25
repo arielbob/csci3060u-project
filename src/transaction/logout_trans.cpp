@@ -10,7 +10,7 @@ bool LogoutTransaction::verify(User* user) {
     return user != NULL;
 }
 
-int LogoutTransaction::execute(User*& current_user, map<string, User*> users) {
+int LogoutTransaction::execute(TransactionFile tf, User*& current_user, map<string, User*> users) {
     if (!verify(current_user)) {
         cout << "Not logged in" << endl;
         return 1;

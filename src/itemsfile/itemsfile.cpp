@@ -13,11 +13,11 @@ using namespace std;
 * @param users The users map
 * @return The generated items map
 */
-map<pair<string, string>, Item*> ItemsFile::read(map<string, User*> users) {
+map<pair<string, string>, Item*> ItemsFile::read(string filename, map<string, User*> users) {
     // map from <item_name, username> to Item*
     map<pair<string, string>, Item*> items;
 
-    ifstream in("items.txt");
+    ifstream in(filename);
     string line;
 
     // loop through items file line by line

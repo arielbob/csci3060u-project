@@ -11,10 +11,10 @@ using namespace std;
 * Parses the accounts file and returns a generated users map from its contents
 * @return The generated users map
 */
-map<string, User*> AccountsFile::read() {
+map<string, User*> AccountsFile::read(string filename) {
     map<string, User*> users;
 
-    ifstream in("userAccounts.txt");
+    ifstream in(filename);
     string line;
 
     // loop through accounts file line by line

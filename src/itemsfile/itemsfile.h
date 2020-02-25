@@ -14,7 +14,7 @@ class ItemsFile {
         * Parses the items file and returns a generated items map from its contents
         * @return The generated items map
         */
-        static std::map<std::pair<std::string, std::string>, Item*> read(std::map<std::string, User*> users);
+        static std::map<std::pair<std::string, std::string>, Item*> read(std::string filename, std::map<std::string, User*> users);
 };
 
 #endif

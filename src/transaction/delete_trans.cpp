@@ -18,7 +18,7 @@ bool DeleteTransaction::verify(User* user) {
     return true;
 }
 
-int DeleteTransaction::execute(User* current_user, map<string, User*> users) {
+int DeleteTransaction::execute(TransactionFile tf, User* current_user, map<string, User*> users) {
     if (!verify(current_user)) return 1;
 
     string username;

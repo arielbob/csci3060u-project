@@ -10,12 +10,17 @@
 #include "transaction/transaction.h"
 #include "accountsfile/accountsfile.h"
 #include "itemsfile/itemsfile.h"
+#include "transactionfile/transactionfile.h"
 
 using namespace std;
 
 User* current_user = NULL;
 
-int processTransaction(string transaction,map<string, User*> users, map<pair<string, string>, Item*> items){//it read in the User input and process to different cases
+int processTransaction(
+    string transaction,map<string, User*> users,
+    map<pair<string, string>, Item*> items,
+    TransactionFile& tf
+) {//it read in the User input and process to different cases
     string transactions[10] = {
         "login",
         "logout",
@@ -38,35 +43,35 @@ int processTransaction(string transaction,map<string, User*> users, map<pair<str
 
     switch(index){
         case 1:
-            LoginTransaction::execute(current_user, users);
+            LoginTransaction::execute(tf, current_user, users);
             break;
 
         case 2:
-            LogoutTransaction::execute(current_user, users);
+            LogoutTransaction::execute(tf, current_user, users);
             break;
 
         case 3:
-            CreateTransaction::execute(current_user, users);
+            CreateTransaction::execute(tf, current_user, users);
             break;
 
         case 4:
-            DeleteTransaction::execute(current_user, users);
+            DeleteTransaction::execute(tf, current_user, users);
             break;
 
         case 5:
-            AdvertiseTransaction::execute(current_user, users, items);
+            AdvertiseTransaction::execute(tf, current_user, users, items);
             break;
 
         case 6:
-            BidTransaction::execute(current_user, users, items);
+            BidTransaction::execute(tf, current_user, users, items);
             break;
 
         case 7:
-            RefundTransaction::execute(current_user, users);
+            RefundTransaction::execute(tf, current_user, users);
             break;
 
         case 8:
-            AddCreditTransaction::execute(current_user, users);
+            AddCreditTransaction::execute(tf, current_user, users);
             break;
 
         case 9:
@@ -83,10 +88,17 @@ void init(){
     system("clear");
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+    if (argc != 4) {
+        cout << "Usage: ./main <accounts file> <items file> <transactions file>" << endl;
+        return 1;
+    }
+
     init();
-    map<string, User*> users = AccountsFile::read();
-    map<pair<string, string>, Item*> items = ItemsFile::read(users);
+    map<string, User*> users = AccountsFile::read(argv[1]);
+    map<pair<string, string>, Item*> items = ItemsFile::read(argv[2], users);
+    TransactionFile tf;
+    tf.open(argv[3]);
 
     while(1){
         string transaction;
@@ -95,9 +107,10 @@ int main() {
         // i changed it to getline is it can reading one line of transaction so Add Credit can be read
         // cout << "transaction entered: " << transaction << endl;
         if (getline(cin, transaction)) {
-            processTransaction(transaction, users, items);
+            processTransaction(transaction, users, items, tf);
         }
         cout <<endl;
     }
+
     return 0;
 }

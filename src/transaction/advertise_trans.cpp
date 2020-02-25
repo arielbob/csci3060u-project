@@ -20,7 +20,7 @@ bool AdvertiseTransaction::verify(User* user) {
     return true;
 }
 
-int AdvertiseTransaction::execute(User* current_user, map<string, User*> users, map<pair<string, string>, Item*> items) {
+int AdvertiseTransaction::execute(TransactionFile tf, User* current_user, map<string, User*> users, map<pair<string, string>, Item*> items) {
     if (!verify(current_user)) return 1;
 
     string item;

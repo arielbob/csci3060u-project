@@ -19,7 +19,7 @@ bool RefundTransaction::verify(User* user) {
     return true;
 }
 
-int RefundTransaction::execute(User* current_user, map<string, User*> users) {
+int RefundTransaction::execute(TransactionFile tf, User* current_user, map<string, User*> users) {
     if (!verify(current_user)) return 1;
 
     string buyer;

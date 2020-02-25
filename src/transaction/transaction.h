@@ -5,6 +5,7 @@
 #include <map>
 #include "../user/user.h"
 #include "../item/item.h"
+#include "../transactionfile/transactionfile.h"
 
 /**
 * Class to represent a transaction
@@ -21,7 +22,7 @@
 class LoginTransaction {
     public:
         static bool verify(User* user);
-        static int execute(User*& user, std::map<std::string, User*> users);
+        static int execute(TransactionFile tf, User*& user, std::map<std::string, User*> users);
 };
 
 /**
@@ -30,7 +31,7 @@ class LoginTransaction {
 class LogoutTransaction {
     public:
         static bool verify(User* user);
-        static int execute(User*& user, std::map<std::string, User*> users);
+        static int execute(TransactionFile tf, User*& user, std::map<std::string, User*> users);
 };
 
 /**
@@ -39,7 +40,7 @@ class LogoutTransaction {
 class CreateTransaction {
     public:
         static bool verify(User* user);
-        static int execute(User* user, std::map<std::string, User*> users);
+        static int execute(TransactionFile tf, User* user, std::map<std::string, User*> users);
 };
 
 /**
@@ -48,7 +49,7 @@ class CreateTransaction {
 class DeleteTransaction {
     public:
         static bool verify(User* user);
-        static int execute(User* user, std::map<std::string, User*> users);
+        static int execute(TransactionFile tf, User* user, std::map<std::string, User*> users);
 };
 
 /**
@@ -57,7 +58,7 @@ class DeleteTransaction {
 class AdvertiseTransaction {
     public:
         static bool verify(User* user);
-        static int execute(User* user, std::map<std::string, User*> users, std::map<std::pair<std::string, std::string>, Item*> items);
+        static int execute(TransactionFile tf, User* user, std::map<std::string, User*> users, std::map<std::pair<std::string, std::string>, Item*> items);
 };
 
 /**
@@ -66,7 +67,7 @@ class AdvertiseTransaction {
 class BidTransaction {
     public:
         static bool verify(User* user);
-        static int execute(User* user, std::map<std::string, User*> users, std::map<std::pair<std::string, std::string>, Item*> items);
+        static int execute(TransactionFile tf, User* user, std::map<std::string, User*> users, std::map<std::pair<std::string, std::string>, Item*> items);
 };
 
 /**
@@ -75,7 +76,7 @@ class BidTransaction {
 class RefundTransaction {
     public:
         static bool verify(User* user);
-        static int execute(User* user, std::map<std::string, User*> users);
+        static int execute(TransactionFile tf, User* user, std::map<std::string, User*> users);
 };
 
 /**
@@ -84,7 +85,7 @@ class RefundTransaction {
 class AddCreditTransaction {
     public:
         static bool verify(User* user);
-        static int execute(User* user, std::map<std::string, User*> users);
+        static int execute(TransactionFile tf, User* user, std::map<std::string, User*> users);
 };
 
 #endif

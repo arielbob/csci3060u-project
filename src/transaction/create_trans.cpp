@@ -11,7 +11,7 @@ bool CreateTransaction::verify(User* user) {
     return false;
 }
 
-int CreateTransaction::execute(User* current_user, map<string, User*> users) {
+int CreateTransaction::execute(TransactionFile tf, User* current_user, map<string, User*> users) {
     if (!verify(current_user)) {
         cout <<"Error, prohibit to create account" << endl;
         return 1;
