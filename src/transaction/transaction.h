@@ -78,12 +78,13 @@ class RefundTransaction {
         static int execute(User* user, std::map<std::string, User*> users);
 };
 
-// /**
-// * Class to represent an add credit transaction
-// */
-// class Transaction {
-//     public:
-//         static bool verify(User* user);
-//         static int execute(User* user, std::map<std::string, User*> users);
-// };
+/**
+* Class to represent an addcredit transaction
+*/
+class AddCreditTransaction {
+    public:
+        static bool verify(User* user);
+        static int execute(User* user, std::map<std::string, User*> users);
+};
+
 #endif

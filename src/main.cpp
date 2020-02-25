@@ -6,16 +6,12 @@
 #include <cstdlib>
 #include <utility>
 #include "user/user.h"
-#include "accountsfile/accountsfile.h"
-#include "transaction/transaction.h"
 #include "item/item.h"
+#include "transaction/transaction.h"
 #include "accountsfile/accountsfile.h"
 #include "itemsfile/itemsfile.h"
-#include "transactionfile/transactionfile.h"
 
 using namespace std;
-
-int add_Credit(map<string, User*> users);
 
 User* currentUser = NULL;
 
@@ -60,12 +56,7 @@ int processTransaction(string transaction,map<string, User*> users, map<pair<str
             break;
 
         case 8:
-            if(currentUser == NULL){
-                cout <<"Not Logged in" <<endl;
-                return -1;
-            }
-            add_Credit(users);
-            //add creidt functions
+            AddCreditTransaction::execute(currentUser, users);
             break;
 
         case 9:
@@ -77,44 +68,6 @@ int processTransaction(string transaction,map<string, User*> users, map<pair<str
     }
     return 0;
 }
-//use int so i can have a check if the return value is correct it is a basic version of delete.
-//need to pass one more argument user, so we can check the user typecheck if the current user is the Admin account.
-
-int add_Credit(map<string, User*> users){
-    if(currentUser->user_type != "AA"){
-        cout <<"Error, prohibit to Add Credit \n";
-        return -2;
-    }
-
-    string username;
-    string input_amount;
-    cout <<"Please enter the username to add credit to: ";
-    getline(cin, username);
-    cout <<"Please enter the amount to add: ";
-    getline(cin, input_amount);
-    double amount = atof(input_amount.c_str());
-
-    map<string, User*>::iterator it = users.find(username);
-    if(it == users.end()){
-        cout <<"Error: Username does not exist! \n";
-        return 2;
-    } else if(amount > 1000.0){
-        cout <<"Error: Maximum session credit allowance ($1000.00) reached! \n";
-        return 1;
-    } else if(amount < 0){
-        cout <<"Error: Amount to add must be greater than zero! \n";
-        return 3;
-    } else if((it -> second -> credit + amount) > 999999.99){
-        cout <<"Error: Resulting funds exceed limit in users's account. \n";
-        return 4;
-    }
-    cout <<"Credit added! \n";
-        return 0;
-    //
-    // TODO addcredit
-    //
-}
-
 
 void init(){
     system("clear");
