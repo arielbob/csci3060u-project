@@ -20,7 +20,7 @@
 class LoginTransaction {
     public:
         static bool verify(User* user);
-        static int execute(User* user, std::map<std::string, User*> users);
+        static int execute(User*& user, std::map<std::string, User*> users);
 };
 
 #endif

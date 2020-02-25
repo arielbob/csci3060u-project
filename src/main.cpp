@@ -16,7 +16,6 @@ using namespace std;
 * @return The trimmed string
 */
 int create_account(map<string, User*> users);
-int login(map<string, User*> users);
 int logout(map<string, User*> users);
 int delete_account(map<string, User*> users);
 int add_Credit(map<string, User*> users);
