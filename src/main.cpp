@@ -13,10 +13,20 @@
 
 using namespace std;
 
-User* currentUser = NULL;
+User* current_user = NULL;
 
 int processTransaction(string transaction,map<string, User*> users, map<pair<string, string>, Item*> items){//it read in the User input and process to different cases
-    string transactions[10] = {"login","logout","create","delete","advertise","bid","refund","add credit","exit"};
+    string transactions[10] = {
+        "login",
+        "logout",
+        "create",
+        "delete",
+        "advertise",
+        "bid",
+        "refund",
+        "addcredit",
+        "exit"
+    };
     int index = 0;
 
     for(int i = 0; i < 10; i++){
@@ -28,35 +38,35 @@ int processTransaction(string transaction,map<string, User*> users, map<pair<str
 
     switch(index){
         case 1:
-            LoginTransaction::execute(currentUser, users);
+            LoginTransaction::execute(current_user, users);
             break;
 
         case 2:
-            LogoutTransaction::execute(currentUser, users);
+            LogoutTransaction::execute(current_user, users);
             break;
 
         case 3:
-            CreateTransaction::execute(currentUser, users);
+            CreateTransaction::execute(current_user, users);
             break;
 
         case 4:
-            DeleteTransaction::execute(currentUser, users);
+            DeleteTransaction::execute(current_user, users);
             break;
 
         case 5:
-            AdvertiseTransaction::execute(currentUser, users, items);
+            AdvertiseTransaction::execute(current_user, users, items);
             break;
 
         case 6:
-            BidTransaction::execute(currentUser, users, items);
+            BidTransaction::execute(current_user, users, items);
             break;
 
         case 7:
-            RefundTransaction::execute(currentUser, users);
+            RefundTransaction::execute(current_user, users);
             break;
 
         case 8:
-            AddCreditTransaction::execute(currentUser, users);
+            AddCreditTransaction::execute(current_user, users);
             break;
 
         case 9:
