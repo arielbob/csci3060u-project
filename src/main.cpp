@@ -4,9 +4,14 @@
 #include <map>
 #include <string>
 #include <cstdlib>
+#include <utility>
 #include "user/user.h"
 #include "accountsfile/accountsfile.h"
 #include "transaction/transaction.h"
+#include "item/item.h"
+#include "accountsfile/accountsfile.h"
+#include "itemsfile/itemsfile.h"
+#include "transactionfile/transactionfile.h"
 
 using namespace std;
 
@@ -18,13 +23,12 @@ using namespace std;
 int delete_account(map<string, User*> users);
 int add_Credit(map<string, User*> users);
 int refund(map<string, User*> users);
-int advertise(map<string, User*> users);
-int bid(map<string, User*> users);
+int advertise(map<string, User*> users, map<pair<string, string>, Item*> items);
+int bid(map<string, User*> users, map<pair<string, string>, Item*> items);
 
-    //loginstatus used for check if it is logged in
 User* currentUser = NULL;
 
-int processTransaction(string transaction,map<string, User*> users){//it read in the User input and process to different cases
+int processTransaction(string transaction,map<string, User*> users, map<pair<string, string>, Item*> items){//it read in the User input and process to different cases
     string transactions[10] = {"login","logout","create","delete","advertise","bid","refund","add credit","exit"};
     int index = 0;
 
@@ -62,7 +66,7 @@ int processTransaction(string transaction,map<string, User*> users){//it read in
                 cout <<"Not Logged in" <<endl;
                 return -1;
             }
-            advertise(users);
+            advertise(users, items);
             //advertise functions
             break;
 
@@ -71,7 +75,7 @@ int processTransaction(string transaction,map<string, User*> users){//it read in
                 cout <<"Not Logged in" <<endl;
                 return -1;
             }
-            bid(users);
+            bid(users, items);
             //bid function
             break;
 
@@ -184,40 +188,81 @@ int refund(map<string, User*> users){
     return 0;
 }
 
-int advertise(map<string, User*> users){
+int advertise(map<string, User*> users, map<pair<string, string>, Item*> items){
     if(currentUser->user_type != "FS" && currentUser->user_type != "BS"){
         cout <<"Error, prohibit to advertise item \n";
     }
     string item;
-    double minbid;
-    int numofdays;
+    string input_amount;
+    string input_days;
 
     cout <<"please enter the item to advertise: ";
-    cin >> item;
+    getline(cin,item);
+    if(item.size() > 15){
+        cout << "Error! item name is too long. \n";
+        return 1;
+    }
+
+    pair <string, string> item_seller = make_pair(item,currentUser->username);
+    map<pair<string, string>, Item*>::iterator itemit = items.find(item_seller);
+    if(itemit == items.end()){
+    } else {
+        cout <<"Error, item duplicated with other items. \n";
+        return 2;
+    }
+
     cout <<"please enter the minimum bid for the item: ";
-    cin >>minbid;
+    getline(cin, input_amount);
+    double minbid = atof(input_amount.c_str());
+    if (minbid > 999.99){
+        cout <<"Error, Item price is too high \n";
+        return 3;
+    }
+
     cout <<"please enter the number of days until the auction end: ";
-    cin >>numofdays;
+    getline(cin, input_days);
+    int numofdays = atoi(input_amount.c_str());
+    if (numofdays > 100){
+        cout <<"days of auction is too long \n";
+        return 4;
+    }
 
     return 0;
 }
 
-int bid(map<string, User*> users){
-    if(currentUser->user_type != "BS" && currentUser->user_type != "BS"){
+int bid(map<string, User*> users, map<pair<string, string>, Item*> items){
+    if(currentUser->user_type != "BS" && currentUser->user_type != "BS" && currentUser->user_type != "FS"){
         cout <<"Error, prohibit to Bid item \n";
+        return -1;
     }
     string item;
     string seller;
-    double bid_amount;
-
+    string input_amount;
 
     cout <<"Please enter the item name: ";
-    cin >> item;
+    getline(cin, item);
     cout <<"Please enter the seller's username: ";
-    cin >>seller;
-    cout <<"Current highest bid for guitar: $300.00 \n";
+    getline(cin, seller);
+
+
+    pair <string, string> item_seller = make_pair(item,seller);
+    map<pair<string, string>, Item*>::iterator itemit = items.find(item_seller);
+    if(itemit == items.end()){
+        cout <<"Error, cannot find the items \n";
+        return 2;
+    } else {
+        cout <<"Current highest bid for "<< item <<": $"<<itemit -> second -> current_bid -> amount <<endl;
+    }
     cout <<"Please enter a new bid amount: ";
-    cin >>bid_amount;
+    getline(cin, input_amount);
+    double amount = atof(input_amount.c_str());
+    if (amount <= itemit -> second -> current_bid -> amount){
+        cout <<"Error: Bid must be higher than current highest bid. \n";
+    } else if (amount < itemit -> second -> current_bid -> amount * 1.05){
+        cout <<"Error: Bid must be at least 5% higher than current highest bid. \n";
+    }
+    cout <<"bid entered";
+
 
     return 0;
 }
@@ -229,13 +274,12 @@ int add_Credit(map<string, User*> users){
     }
 
     string username;
-    string input_amount = 0;
+    string input_amount;
     cout <<"Please enter the username to add credit to: ";
-    cin >>username;
+    getline(cin, username);
     cout <<"Please enter the amount to add: ";
     getline(cin, input_amount);
     double amount = atof(input_amount.c_str());
-    cout <<"Credit Added ";
 
     map<string, User*>::iterator it = users.find(username);
     if(it == users.end()){
@@ -266,6 +310,7 @@ void init(){
 int main() {
     init();
     map<string, User*> users = AccountsFile::read();
+    map<pair<string, string>, Item*> items = ItemsFile::read(users);
 
     while(1){
         string transaction;
@@ -274,7 +319,7 @@ int main() {
         // i changed it to getline is it can reading one line of transaction so Add Credit can be read
         // cout << "transaction entered: " << transaction << endl;
         if (getline(cin, transaction)) {
-            processTransaction(transaction,users);
+            processTransaction(transaction, users, items);
         }
         cout <<endl;
     }
