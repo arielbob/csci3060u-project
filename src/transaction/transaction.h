@@ -60,8 +60,6 @@ class AdvertiseTransaction {
         static int execute(User* user, std::map<std::string, User*> users, std::map<std::pair<std::string, std::string>, Item*> items);
 };
 
-// -----------
-
 /**
 * Class to represent a bid transaction
 */
@@ -71,14 +69,14 @@ class BidTransaction {
         static int execute(User* user, std::map<std::string, User*> users, std::map<std::pair<std::string, std::string>, Item*> items);
 };
 
-// /**
-// * Class to represent a refund transaction
-// */
-// class Transaction {
-//     public:
-//         static bool verify(User* user);
-//         static int execute(User* user, std::map<std::string, User*> users);
-// };
+/**
+* Class to represent a refund transaction
+*/
+class RefundTransaction {
+    public:
+        static bool verify(User* user);
+        static int execute(User* user, std::map<std::string, User*> users);
+};
 
 // /**
 // * Class to represent an add credit transaction

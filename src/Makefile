@@ -3,7 +3,7 @@ FLAGS = -Wall -g -std=c++11
 VPATH = out # to have make look for target files in out folder
 
 # objects required for final linking
-objects = main.o user.o item.o bid.o transactionfile.o accountsfile.o itemsfile.o util.o login_trans.o logout_trans.o create_trans.o delete_trans.o advertise_trans.o bid_trans.o
+objects = main.o user.o item.o bid.o transactionfile.o accountsfile.o itemsfile.o util.o login_trans.o logout_trans.o create_trans.o delete_trans.o advertise_trans.o bid_trans.o refund_trans.o
 # prepend object filenames with out/ folder
 # $(patsubst pattern, replacement, text)
 OBJS = $(patsubst %.o, out/%.o, $(objects))
@@ -65,6 +65,9 @@ advertise_trans.o: transaction/advertise_trans.cpp $(transaction_dep) $(deps)
 	$(CC) -c $(FLAGS) $< -o out/$@
 
 bid_trans.o: transaction/bid_trans.cpp $(transaction_dep) $(deps)
+	$(CC) -c $(FLAGS) $< -o out/$@
+
+refund_trans.o: transaction/refund_trans.cpp $(transaction_dep) $(deps)
 	$(CC) -c $(FLAGS) $< -o out/$@
 
 main.o: main.cpp $(deps)

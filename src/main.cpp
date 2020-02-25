@@ -15,13 +15,7 @@
 
 using namespace std;
 
-/**
-* Trims whitespace from a string
-* @param str String to be trimmed
-* @return The trimmed string
-*/
 int add_Credit(map<string, User*> users);
-int refund(map<string, User*> users);
 
 User* currentUser = NULL;
 
@@ -62,12 +56,7 @@ int processTransaction(string transaction,map<string, User*> users, map<pair<str
             break;
 
         case 7:
-            if(currentUser == NULL){
-                cout <<"Not Logged in" <<endl;
-                return -1;
-            }
-            refund(users);
-            //refund functions
+            RefundTransaction::execute(currentUser, users);
             break;
 
         case 8:
@@ -90,59 +79,6 @@ int processTransaction(string transaction,map<string, User*> users, map<pair<str
 }
 //use int so i can have a check if the return value is correct it is a basic version of delete.
 //need to pass one more argument user, so we can check the user typecheck if the current user is the Admin account.
-
-int refund(map<string, User*> users){
-    if(currentUser->user_type != "AA"){
-        cout <<"Error, prohibit to process refund \n";
-        return -2;
-    }
-
-    string buyer;
-    string seller;
-    string input_amount;
-
-    cout <<"Please enter the buyer's name: ";
-    getline(cin, buyer);
-    map<string, User*>::iterator buyerit = users.find(buyer);
-    if(buyerit == users.end()){
-        cout <<"Error: Username does not exist! \n";
-        return 2;
-    } else if(buyerit ->second -> user_type == "SS"){
-        cout <<"Error: User is not of type buy-standard. \n";
-        return 1;
-    }
-    cout <<"Please enter the seller's username: ";
-    getline(cin, seller);
-    map<string, User*>::iterator sellerit = users.find(seller);
-    if(sellerit == users.end()){
-        cout <<"Error: Username does not exist! \n";
-        return 2;
-    }else if(sellerit -> second -> user_type == "SS"){
-        cout <<"Error: User is not of type sell-standard.\n";
-        return 1;
-    }
-    cout <<"Please enter the amount to refund: ";
-    getline(cin, input_amount);
-    double amount = atof(input_amount.c_str());
-
-
-    if (amount < 0){
-        cout <<"Error: Amount to refund must be greater than zero!";
-        return 3;
-    } else if((sellerit -> second ->credit + amount) >999999.99){
-        cout <<"Error: Resulting funds exceed limit in seller's account. \n";
-        return 4;
-    } else if(sellerit -> second ->credit < amount){
-        cout <<"Error: Seller has insufficient funds for refund. \n";
-        return 5;
-    }
-    //
-    //TODO refund
-    //
-
-    cout <<"Refund Successful! \n";
-    return 0;
-}
 
 int add_Credit(map<string, User*> users){
     if(currentUser->user_type != "AA"){
