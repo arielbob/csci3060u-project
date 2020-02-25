@@ -15,7 +15,6 @@ using namespace std;
 * @param str String to be trimmed
 * @return The trimmed string
 */
-int create_account(map<string, User*> users);
 int delete_account(map<string, User*> users);
 int add_Credit(map<string, User*> users);
 int refund(map<string, User*> users);
@@ -46,12 +45,7 @@ int processTransaction(string transaction,map<string, User*> users){//it read in
             break;
 
         case 3:
-            if(currentUser == NULL){
-                cout <<"Not Logged in" <<endl;
-                return -1;
-            }
-            //create functions check mark worked
-            create_account(users);
+            CreateTransaction::execute(currentUser, users);
             break;
 
         case 4:
@@ -135,46 +129,6 @@ int delete_account(map<string, User*> users){//screw this one
     //
 
     return 1;
-}
-
-int create_account(map<string, User*> users){//hell screw the END
-    if(currentUser->user_type != "AA"){
-        cout <<"Error, prohibit to create account \n";
-        return -2;
-    }
-
-    string username;
-    string user_type;
-
-    cout <<"Please enter the username: ";
-    getline(cin, username);
-    if(username.size() > 15 || username.size() <= 0){
-        cout <<"Error, username too long or too short" <<endl;
-        return 1;
-    }
-
-    map<string, User*>::iterator it = users.find(username);
-    if(it == users.end()){
-    } else{
-        cout <<"Error, username Already been take \n";
-        return 2;
-    }
-
-    //end of testing username
-    cout <<"Please enter the user_type: ";
-    getline(cin, user_type);
-    if(user_type != "AA" && user_type != "FS" && user_type != "SS" && user_type != "BS"){
-        cout <<"Error, user type is invaild" <<endl;
-        return 3;
-    }
-    //end of testing user_type
-
-    cout <<"Account Create Successful! \n";
-
-    //
-    // TODO
-    //
-    return 0;
 }
 
 int refund(map<string, User*> users){

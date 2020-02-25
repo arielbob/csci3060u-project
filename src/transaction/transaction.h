@@ -32,4 +32,13 @@ class LogoutTransaction {
         static int execute(User*& user, std::map<std::string, User*> users);
 };
 
+/**
+* Class to represent a create transaction
+*/
+class CreateTransaction {
+    public:
+        static bool verify(User* user);
+        static int execute(User* user, std::map<std::string, User*> users);
+};
+
 #endif
