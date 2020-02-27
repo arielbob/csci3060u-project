@@ -1,2 +1,2 @@
-guitar              seller          oldbuyer       007 300.00
-END                                                          
+guitar              seller          oldbuyer        007 300.00
+END                                                           
