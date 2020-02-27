@@ -24,9 +24,9 @@ int AddCreditTransaction::execute(TransactionFile tf, User* current_user, map<st
 
     string username;
     string input_amount;
-    cout <<"Please enter the username to add credit to: ";
+    cout << "Please enter the username to add credit to:" << endl;
     getline(cin, username);
-    cout <<"Please enter the amount to add: ";
+    cout << "Please enter the amount to add:" << endl;
     getline(cin, input_amount);
     double amount = atof(input_amount.c_str());
 

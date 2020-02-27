@@ -17,7 +17,7 @@ int LoginTransaction::execute(TransactionFile tf, User*& current_user, map<strin
     }
 
     string username;
-    cout << "Please enter your username: ";
+    cout << "Please enter your username:" << endl;
     getline(cin, username);
 
     map<string, User*>::iterator it = users.find(username);

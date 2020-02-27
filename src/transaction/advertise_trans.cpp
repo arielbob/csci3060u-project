@@ -27,10 +27,10 @@ int AdvertiseTransaction::execute(TransactionFile tf, User* current_user, map<st
     string input_amount;
     string input_days;
 
-    cout <<"please enter the item to advertise: ";
+    cout << "Please enter the item to advertise:" << endl;
     getline(cin,item);
     if(item.size() > 15){
-        cout << "Error! item name is too long. \n";
+        cout << "Error! item name is too long.\n";
         return 1;
     }
 
@@ -38,23 +38,23 @@ int AdvertiseTransaction::execute(TransactionFile tf, User* current_user, map<st
     map<pair<string, string>, Item*>::iterator itemit = items.find(item_seller);
     if(itemit == items.end()){
     } else {
-        cout <<"Error, item duplicated with other items. \n";
+        cout <<"Error, item duplicated with other items.\n";
         return 2;
     }
 
-    cout <<"please enter the minimum bid for the item: ";
+    cout << "Please enter the minimum bid for the item:" << endl;
     getline(cin, input_amount);
     double minbid = atof(input_amount.c_str());
     if (minbid > 999.99){
-        cout <<"Error, Item price is too high \n";
+        cout <<"Error, Item price is too high\n";
         return 3;
     }
 
-    cout <<"please enter the number of days until the auction end: ";
+    cout << "Please enter the number of days until the auction end:" << endl;
     getline(cin, input_days);
     int numofdays = atoi(input_amount.c_str());
     if (numofdays > 100){
-        cout <<"days of auction is too long \n";
+        cout <<"days of auction is too long\n";
         return 4;
     }
 

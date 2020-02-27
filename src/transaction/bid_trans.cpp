@@ -27,9 +27,9 @@ int BidTransaction::execute(TransactionFile tf, User* current_user, map<string, 
     string seller;
     string input_amount;
 
-    cout << "Please enter the item name: ";
+    cout << "Please enter the item name:" << endl;
     getline(cin, item);
-    cout << "Please enter the seller's username: ";
+    cout << "Please enter the seller's username:" << endl;
     getline(cin, seller);
 
 
@@ -41,7 +41,7 @@ int BidTransaction::execute(TransactionFile tf, User* current_user, map<string, 
     } else {
         cout << "Current highest bid for "<<  item << ": $"<< itemit -> second -> current_bid -> amount << endl;
     }
-    cout << "Please enter a new bid amount: ";
+    cout << "Please enter a new bid amount:" << endl;
     getline(cin, input_amount);
     double amount = atof(input_amount.c_str());
     if (amount <= itemit -> second -> current_bid -> amount){

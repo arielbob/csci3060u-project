@@ -20,7 +20,7 @@ int CreateTransaction::execute(TransactionFile tf, User* current_user, map<strin
     string username;
     string user_type;
 
-    cout <<"Please enter the username: ";
+    cout << "Please enter the username:" << endl;
     getline(cin, username);
     if(username.size() > 15 || username.size() <= 0){
         cout <<"Error, username too long or too short" <<endl;
@@ -35,7 +35,7 @@ int CreateTransaction::execute(TransactionFile tf, User* current_user, map<strin
     }
 
     //end of testing username
-    cout <<"Please enter the user_type: ";
+    cout << "Please enter the user_type:" << endl;
     getline(cin, user_type);
     if(user_type != "AA" && user_type != "FS" && user_type != "SS" && user_type != "BS"){
         cout <<"Error, user type is invaild" <<endl;

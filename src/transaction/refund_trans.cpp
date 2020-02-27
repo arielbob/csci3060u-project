@@ -26,7 +26,7 @@ int RefundTransaction::execute(TransactionFile tf, User* current_user, map<strin
     string seller;
     string input_amount;
 
-    cout <<"Please enter the buyer's name: ";
+    cout << "Please enter the buyer's name:" << endl;
     getline(cin, buyer);
     map<string, User*>::iterator buyerit = users.find(buyer);
     if(buyerit == users.end()){
@@ -36,7 +36,7 @@ int RefundTransaction::execute(TransactionFile tf, User* current_user, map<strin
         cout <<"Error: User is not of type buy-standard. \n";
         return 1;
     }
-    cout <<"Please enter the seller's username: ";
+    cout << "Please enter the seller's username:" << endl;
     getline(cin, seller);
     map<string, User*>::iterator sellerit = users.find(seller);
     if(sellerit == users.end()){
@@ -46,7 +46,7 @@ int RefundTransaction::execute(TransactionFile tf, User* current_user, map<strin
         cout <<"Error: User is not of type sell-standard.\n";
         return 1;
     }
-    cout <<"Please enter the amount to refund: ";
+    cout << "Please enter the amount to refund:" << endl;
     getline(cin, input_amount);
     double amount = atof(input_amount.c_str());
 

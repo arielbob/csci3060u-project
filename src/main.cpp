@@ -17,7 +17,8 @@ using namespace std;
 User* current_user = NULL;
 
 int processTransaction(
-    string transaction,map<string, User*> users,
+    string transaction,
+    map<string, User*> users,
     map<pair<string, string>, Item*> items,
     TransactionFile& tf
 ) {//it read in the User input and process to different cases
@@ -32,6 +33,9 @@ int processTransaction(
         "addcredit",
         "exit"
     };
+    // cout << "transaction length: " << transaction.size() << endl;
+    // cout << "transaction: " << transaction << endl;
+    // cout << '\n' << transaction << " == " << transactions[0] << ": " << (transaction == transactions[0]) << endl;
     int index = 0;
 
     for(int i = 0; i < 10; i++){
@@ -78,14 +82,14 @@ int processTransaction(
             exit(0);
 
         default:
-            cout <<"Transaction Error" <<endl;
+            cout << "Transaction Error" << endl;
             break;
     }
     return 0;
 }
 
 void init(){
-    system("clear");
+    // system("clear");
 }
 
 int main(int argc, char* argv[]) {
@@ -103,13 +107,14 @@ int main(int argc, char* argv[]) {
     while(1){
         string transaction;
         cout << "Welcome to CBay Auctioning System!" << endl;
-        cout << "Please enter a transaction: ";
+        cout << "Please enter a transaction:";
         // i changed it to getline is it can reading one line of transaction so Add Credit can be read
         // cout << "transaction entered: " << transaction << endl;
-        if (getline(cin, transaction)) {
-            processTransaction(transaction, users, items, tf);
-        }
-        cout <<endl;
+        cout << endl;
+        getline(cin, transaction, '\n');
+        processTransaction(transaction, users, items, tf);
+        // cout << "transaction entered: " << transaction << endl;
+        cout << endl;
     }
 
     return 0;

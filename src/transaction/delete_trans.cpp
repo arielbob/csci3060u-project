@@ -22,7 +22,7 @@ int DeleteTransaction::execute(TransactionFile tf, User* current_user, map<strin
     if (!verify(current_user)) return 1;
 
     string username;
-    cout << "Please enter the username: ";
+    cout << "Please enter the username:" << endl;
     getline(cin, username);
 
     map<string, User*>::iterator it = users.find(username);
