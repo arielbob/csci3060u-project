@@ -2,11 +2,10 @@ Welcome to CBay Auctioning System!
 Please enter a transaction:
 Please enter your username:
 Logged in.
-[OK] available items file
 
-Welcome Admin
+Welcome admin
 Please enter a transaction:
-Please enter username:
-User type:
+Please enter the username:
+Error: Username already taken
 
-Error! Username have been take
+Please enter a transaction:
