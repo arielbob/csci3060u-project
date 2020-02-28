@@ -86,6 +86,7 @@ class RefundTransaction {
 */
 class AddCreditTransaction {
     public:
+        static std::map<std::string, double> daily_max;
         static bool verify(User* user);
         static int execute(TransactionFile tf, User* user, std::map<std::string, User*> users);
 };

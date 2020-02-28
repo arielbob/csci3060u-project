@@ -6,6 +6,8 @@
 
 using namespace std;
 
+map<string, double> AddCreditTransaction::daily_max;
+
 bool AddCreditTransaction::verify(User* user) {
     if (!user) {
         cout << "Error: Not logged in" <<  endl;
@@ -44,10 +46,17 @@ int AddCreditTransaction::execute(TransactionFile tf, User* current_user, map<st
 
     double amount = atof(input_amount.c_str());
 
-    if(amount > 1000.0){
+    map<string, double>::iterator dailyit = daily_max.find(username);
+    if(dailyit == daily_max.end()){
+        daily_max.insert(pair<string,double>(username, amount));
+    }
+    //dailyit -> second = dailyit -> second + amount;
+    if (dailyit->second + amount > 1000){
         cout <<"Error: Maximum session credit allowance ($1000.00) reached!\n";
         return 1;
-    } else if(amount <= 0){
+    }
+
+    if(amount <= 0){
         cout <<"Error: Amount to add must be greater than zero!\n";
         return 3;
     } else if((it -> second -> credit + amount) > 999999.99){

@@ -12,7 +12,7 @@ bool LoginTransaction::verify(User* user) {
         cout << "Error: Already logged in" << endl;
         return false;
     }
-    
+
     return true;
 }
 
