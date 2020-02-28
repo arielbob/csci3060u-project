@@ -1,6 +1,14 @@
 #!/bin/bash
 
-transaction_tests="tests/*"
+# command line argument to run tests for a single transaction
+# ex: ./test.sh addcredit
+#     will only run the tests for the addcredit transaction
+if [ -n "$1" ]
+then
+    transaction_tests="tests/$1"
+else
+    transaction_tests="tests/*"
+fi
 
 for transaction in $transaction_tests
 do
