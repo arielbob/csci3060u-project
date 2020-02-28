@@ -23,9 +23,9 @@ int LoginTransaction::execute(TransactionFile tf, User*& current_user, map<strin
     map<string, User*>::iterator it = users.find(username);
     if(it == users.end()){
         cout << "Error, username not found";
-    }else{
+    } else {
         current_user = it->second;
-        cout << "You are Logged in \n";
+        cout << "Logged in." << endl;
     }
 
     return 0;

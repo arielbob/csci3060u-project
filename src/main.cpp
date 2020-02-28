@@ -33,9 +33,6 @@ int processTransaction(
         "addcredit",
         "exit"
     };
-    // cout << "transaction length: " << transaction.size() << endl;
-    // cout << "transaction: " << transaction << endl;
-    // cout << '\n' << transaction << " == " << transactions[0] << ": " << (transaction == transactions[0]) << endl;
     int index = 0;
 
     for(int i = 0; i < 10; i++){
@@ -104,16 +101,13 @@ int main(int argc, char* argv[]) {
     TransactionFile tf;
     tf.open(argv[3]);
 
+    cout << "Welcome to CBay Auctioning System!" << endl;
     while(1){
         string transaction;
-        cout << "Welcome to CBay Auctioning System!" << endl;
-        cout << "Please enter a transaction:";
+        cout << "Please enter a transaction:" << endl;
         // i changed it to getline is it can reading one line of transaction so Add Credit can be read
-        // cout << "transaction entered: " << transaction << endl;
-        cout << endl;
-        getline(cin, transaction, '\n');
+        getline(cin, transaction);
         processTransaction(transaction, users, items, tf);
-        // cout << "transaction entered: " << transaction << endl;
         cout << endl;
     }
 
