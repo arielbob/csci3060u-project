@@ -13,7 +13,7 @@ bool BidTransaction::verify(User* user) {
 
     // QUESTION: are admins allowed to bid?
     if(user->user_type != "BS" && user->user_type != "FS"){
-        cout << "Error, prohibit to Bid item" <<  endl;
+        cout << "Error: prohibit to Bid item" <<  endl;
         return false;
     }
 
@@ -36,7 +36,7 @@ int BidTransaction::execute(TransactionFile tf, User* current_user, map<string, 
     pair <string, string> item_seller = make_pair(item,seller);
     map<pair<string, string>, Item*>::iterator itemit = items.find(item_seller);
     if(itemit == items.end()){
-        cout << "Error, cannot find the items \n";
+        cout << "Error: cannot find the items \n";
         return 2;
     } else {
         cout << "Current highest bid for "<<  item << ": $"<< itemit -> second -> current_bid -> amount << endl;

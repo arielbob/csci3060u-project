@@ -12,7 +12,7 @@ bool LoginTransaction::verify(User* user) {
 
 int LoginTransaction::execute(TransactionFile tf, User*& current_user, map<string, User*> users) {
     if (!verify(current_user)) {
-        cout << "Already logged in" << endl;
+        cout << "Error: Already logged in" << endl;
         return 1;
     }
 

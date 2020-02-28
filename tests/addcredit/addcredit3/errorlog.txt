@@ -1,0 +1,6 @@
+delete [OK] available items file from expect output
+Please enter the username to add credit enter the wrong username
+but it ask for amount first
+unix newline and windows new line error
+expect output missing You have logout output.
+fixed the space between words in expect output

@@ -20,7 +20,7 @@ int LogoutTransaction::execute(TransactionFile tf, User*& current_user, map<stri
 
     //daily transaction file on working
     current_user = NULL;
-    cout << "You have logged out \n";
+    cout << "You have logged out" <<endl;
     //
     //TODO Logout transaction;
     //

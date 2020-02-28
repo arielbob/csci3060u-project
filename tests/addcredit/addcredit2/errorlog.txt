@@ -1,0 +1,5 @@
+delete [OK] available items file from expect output
+expect output is succeed in bad condition.
+including sample input file should be stop before entering the amount to add.
+error should not with comma.
+fixed the space between words in expect output

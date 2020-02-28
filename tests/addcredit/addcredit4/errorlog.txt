@@ -1,0 +1,7 @@
+dame, i feel this should not correct.
+was that one seesion? or max limit?
+didnt implement it tho.
+
+delete [OK] available items file from expect output
+In add credit. only checked once transaction for 1000 max. but input takes 2 times adds up to make it more than 1000
+delete space between newline and ouput

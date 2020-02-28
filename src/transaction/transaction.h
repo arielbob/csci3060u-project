@@ -1,4 +1,4 @@
-#ifndef TRANSACTION_H 
+#ifndef TRANSACTION_H
 #define TRANSACTION_H
 
 #include <string>
@@ -22,6 +22,7 @@
 class LoginTransaction {
     public:
         static bool verify(User* user);
+        //static bool isNumber(std::string &s);
         static int execute(TransactionFile tf, User*& user, std::map<std::string, User*> users);
 };
 

@@ -1,0 +1,5 @@
+delete [OK] available items file from expect output
+from input the seller should be lower case
+fix unix and windows newline problems
+add item advertised to the code
+fix capital issue in expect output for please

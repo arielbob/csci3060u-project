@@ -1,0 +1,5 @@
+delete [OK] available items file from expect output
+The amount should be greater than 0 but set amount < 0
+the unix and windows newline erro on max reached
+delete space between newline and ouput
+fixed the space between words in expect output

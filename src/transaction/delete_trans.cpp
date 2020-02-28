@@ -27,7 +27,7 @@ int DeleteTransaction::execute(TransactionFile tf, User* current_user, map<strin
 
     map<string, User*>::iterator it = users.find(username);
     if(it == users.end()){
-        cout << "Error, username could not found" << endl;
+        cout << "Error: username could not found" << endl;
         return 2;
     } else{
         cout << "Account Delete Successful!" << endl;

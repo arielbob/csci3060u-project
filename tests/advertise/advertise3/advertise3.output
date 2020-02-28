@@ -1,8 +1,9 @@
 Welcome to CBay Auctioning System!
 Please enter a transaction:
+Please enter your username:
+Error: Username not found
 
-welcome user
 Please enter a transaction:
+Error: Not logged in
 
-Error: Already Logged In
 Please enter a transaction:
