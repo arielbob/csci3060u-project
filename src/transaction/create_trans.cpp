@@ -3,7 +3,7 @@
 #include <string>
 #include "../user/user.h"
 #include "transaction.h"
-
+#include "../util/util.h"
 using namespace std;
 
 bool CreateTransaction::verify(User* user) {
@@ -11,7 +11,6 @@ bool CreateTransaction::verify(User* user) {
         cout << "Error: Not logged in" <<  endl;
         return false;
     }
-
     if (user->user_type == "AA") return true;
 
     cout << "Error: Transaction not permitted for your user type" << endl;
@@ -23,6 +22,7 @@ int CreateTransaction::execute(TransactionFile tf, User* current_user, map<strin
 
     string username;
     string user_type;
+    string user_credit;
 
     cout << "Please enter the username:" << endl;
     getline(cin, username);
@@ -50,6 +50,18 @@ int CreateTransaction::execute(TransactionFile tf, User* current_user, map<strin
     if(user_type != "AA" && user_type != "FS" && user_type != "SS" && user_type != "BS"){
         cout <<"Error: Invalid user type" <<endl;
         return 3;
+    }
+
+    cout <<"Please enter the initial credit:" <<endl;
+    getline(cin, user_credit);
+    if(!util::isNumber(user_credit)){
+        cout <<"Error: Invalid input" <<endl;
+        return 4;
+    }
+    double credit = atof(user_credit.c_str());
+    if (credit < 0){
+        cout <<"Error: inital credit should greater than zero\n";
+        return 5;
     }
     //end of testing user_type
 

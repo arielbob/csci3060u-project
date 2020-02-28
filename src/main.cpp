@@ -85,17 +85,12 @@ int processTransaction(
     return 0;
 }
 
-void init(){
-    // system("clear");
-}
-
 int main(int argc, char* argv[]) {
     if (argc != 4) {
         cout << "Usage: ./main <accounts file> <items file> <transactions file>" << endl;
         return 1;
     }
 
-    init();
     map<string, User*> users = AccountsFile::read(argv[1]);
     map<pair<string, string>, Item*> items = ItemsFile::read(argv[2], users);
     TransactionFile tf;

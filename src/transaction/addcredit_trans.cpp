@@ -17,7 +17,6 @@ bool AddCreditTransaction::verify(User* user) {
     return true;
 }
 
-
 int AddCreditTransaction::execute(TransactionFile tf, User* current_user, map<string, User*> users) {
     if (!verify(current_user)) return 1;
 
