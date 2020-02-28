@@ -48,13 +48,13 @@ do
                 echo -e "\e[101m\e[30m FAIL \e[39m\e[49m $test_name"
                 if ! diff $test/$test_name.output $test/$test_name.exoutput > /dev/null ;
                 then
-                    echo "OUTPUT DIFF:"
+                    echo -e "\e[106m\e[30m OUTPUT DIFF \e[39m\e[49m"
                     diff $test/$test_name.output $test/$test_name.exoutput
                 fi
 
                 if ! diff $test/transactions.output $test/transactions.txt > /dev/null ;
                 then
-                    echo "TRANSACTIONS DIFF:"
+                    echo -e "\e[106m\e[30m TRANSACTIONS DIFF \e[39m\e[49m"
                     diff $test/transactions.output $test/transactions.txt
                 fi
                 echo
