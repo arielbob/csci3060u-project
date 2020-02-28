@@ -41,16 +41,24 @@ do
 
             src/main $test/userAccounts.txt $test/items.txt $test/transactions.output < $test/$test_name.input > $test/$test_name.output
 
-            if diff $test/$test_name.output $test/$test_name.exoutput > /dev/null;
+            if diff $test/$test_name.output $test/$test_name.exoutput > /dev/null && diff $test/transactions.output $test/transactions.txt > /dev/null ;
             then
                 echo -e "\e[102m\e[30m PASS \e[39m\e[49m $test_name"
             else
                 echo -e "\e[101m\e[30m FAIL \e[39m\e[49m $test_name"
-                diff $test/$test_name.output $test/$test_name.exoutput
+                if ! diff $test/$test_name.output $test/$test_name.exoutput > /dev/null ;
+                then
+                    echo "OUTPUT DIFF:"
+                    diff $test/$test_name.output $test/$test_name.exoutput
+                fi
+
+                if ! diff $test/transactions.output $test/transactions.txt > /dev/null ;
+                then
+                    echo "TRANSACTIONS DIFF:"
+                    diff $test/transactions.output $test/transactions.txt
+                fi
                 echo
             fi
-
-            # TODO: diff the output transactions file with expected transactions file
 
             # remove temporary files
             rm $test/transactions.output
