@@ -76,6 +76,7 @@ int processTransaction(
             break;
 
         case 9:
+            tf.write_end_session();
             exit(0);
 
         default:

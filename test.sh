@@ -17,7 +17,17 @@ do
         transaction_name=${transaction##*/}
         echo -e "\e[7m          $transaction_name          \e[0m"
 
-        for test in $transaction/*
+        # command line arg to only run single test in a transaction
+        # ex: ./test.sh login login1
+        #     will only run login1 test under login transaction
+        if [ -n "$2" ]
+        then
+            test_dir=$transaction/$2
+        else
+            test_dir=$transaction/*
+        fi
+
+        for test in $test_dir
         do
             test_name=${test##*/}
 
@@ -25,8 +35,9 @@ do
             touch $test/$test_name.output       # program output
 
             # generate necessary files if they don't exist
-            touch $test/items.txt
-            touch $test/userAccounts.txt
+            # actually, we shouldn't since some tests rely on them not existing
+            # touch $test/items.txt
+            # touch $test/userAccounts.txt
 
             src/main $test/userAccounts.txt $test/items.txt $test/transactions.output < $test/$test_name.input > $test/$test_name.output
 

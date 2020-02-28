@@ -7,14 +7,16 @@
 using namespace std;
 
 bool LogoutTransaction::verify(User* user) {
-    return user != NULL;
+    if (!user) {
+        cout << "Error: Not logged in" << endl;
+        return false;
+    }
+
+    return true;
 }
 
 int LogoutTransaction::execute(TransactionFile tf, User*& current_user, map<string, User*> users) {
-    if (!verify(current_user)) {
-        cout << "Not logged in" << endl;
-        return 1;
-    }
+    if (!verify(current_user)) return 1;
 
     //daily transaction file on working
     current_user = NULL;

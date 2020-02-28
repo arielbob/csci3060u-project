@@ -1,8 +1,6 @@
-[OK] user account file
-
 Welcome to CBay Auctioning System!
 Please enter a transaction:
 Please enter your username:
+Error: Username not found
 
-Error: Username does not exist!
-Please enter your username:
+Please enter a transaction:

@@ -8,7 +8,7 @@ using namespace std;
 
 bool DeleteTransaction::verify(User* user) {
     if (!user) {
-        cout << "Not logged in" << endl;
+        cout << "Error: Not logged in" << endl;
         return false;
     } else if (user->user_type != "AA") {
         cout << "Error: Prohibited to delete accounts" << endl;

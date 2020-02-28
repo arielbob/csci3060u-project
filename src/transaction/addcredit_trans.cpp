@@ -7,7 +7,7 @@ using namespace std;
 
 bool AddCreditTransaction::verify(User* user) {
     if (!user) {
-        cout << "Not logged in" <<  endl;
+        cout << "Error: Not logged in" <<  endl;
         return false;
     }
 

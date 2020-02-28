@@ -22,10 +22,10 @@ int LoginTransaction::execute(TransactionFile tf, User*& current_user, map<strin
 
     map<string, User*>::iterator it = users.find(username);
     if(it == users.end()){
-        cout << "Error, username not found";
+        cout << "Error: Username not found" << endl;
     } else {
         current_user = it->second;
-        cout << "Logged in." << endl;
+        cout << "Logged in." << endl << endl << "Welcome " << username;
     }
 
     return 0;

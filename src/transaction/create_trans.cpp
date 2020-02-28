@@ -7,7 +7,13 @@
 using namespace std;
 
 bool CreateTransaction::verify(User* user) {
-    if (user && user->user_type == "AA") return true;
+    if (!user) {
+        cout << "Error: Not logged in" <<  endl;
+        return false;
+    }
+    
+    if (user->user_type == "AA") return true;
+
     return false;
 }
 

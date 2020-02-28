@@ -1,4 +1,5 @@
 #include <map>
+#include <iostream>
 #include <string>
 #include <fstream>
 #include "accountsfile.h"
@@ -15,6 +16,12 @@ map<string, User*> AccountsFile::read(string filename) {
     map<string, User*> users;
 
     ifstream in(filename);
+
+    if (!in.is_open()) {
+        cout << "Error: Could not open user accounts file" << endl;
+        exit(1);
+    }
+
     string line;
 
     // loop through accounts file line by line
