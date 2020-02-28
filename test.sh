@@ -15,7 +15,7 @@ do
     if [ -d "$transaction" ]
     then
         transaction_name=${transaction##*/}
-        echo -e "\e[7m          $transaction_name          \e[0m"
+        echo -e "\e[7m  $transaction_name  \e[0m"
 
         # command line arg to only run single test in a transaction
         # ex: ./test.sh login login1
@@ -56,5 +56,7 @@ do
             rm $test/transactions.output
             rm $test/$test_name.output
         done
+
+        echo
     fi
 done
