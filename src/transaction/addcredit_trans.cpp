@@ -14,11 +14,6 @@ bool AddCreditTransaction::verify(User* user) {
         return false;
     }
 
-    if(user->user_type != "AA"){
-        cout << "Error: Transaction not permitted for your user type" <<  endl;
-        return false;
-    }
-
     return true;
 }
 
@@ -29,14 +24,19 @@ int AddCreditTransaction::execute(TransactionFile tf, User* current_user, map<st
     string username;
     string input_amount;
 
-    cout << "Please enter the username to add credit to:" << endl;
-    getline(cin, username);
+    if (current_user->user_type == "AA") {
+        cout << "Please enter the username to add credit to:" << endl;
+        getline(cin, username);
+    } else {
+        username = current_user->username;
+    }
 
     map<string, User*>::iterator it = users.find(username);
     if(it == users.end()){
         cout <<"Error: Username does not exist!" <<endl;
         return 2;
     }
+
     cout << "Please enter the amount to add:" << endl;
     getline(cin, input_amount);
     if (!util::isNumber(input_amount)){
