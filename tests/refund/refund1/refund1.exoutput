@@ -2,14 +2,12 @@ Welcome to CBay Auctioning System!
 Please enter a transaction:
 Please enter your username:
 Logged in.
-[OK] available items file
 
 Welcome admin
 Please enter a transaction:
-Please enter the buyer's name:
+Please enter the buyer's username:
 Please enter the seller's username:
 Please enter the amount to refund:
-Amount refunded!
-Please enter a transaction:
+Refund successful!
 
-Session terminated.
+Please enter a transaction:
