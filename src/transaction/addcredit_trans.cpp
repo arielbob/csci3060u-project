@@ -67,7 +67,5 @@ int AddCreditTransaction::execute(TransactionFile tf, User* current_user, map<st
 
     cout << "Credit added!" << endl;
     return 0;
-    //
-    // TODO addcredit
-    //
+
 }

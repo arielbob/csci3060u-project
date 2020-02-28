@@ -66,7 +66,7 @@ int CreateTransaction::execute(TransactionFile tf, User* current_user, map<strin
     //end of testing user_type
 
     // TODO: add credit here
-    // tf.write_create_account(username, user_type, )
+    tf.write_create_account(username, user_type,credit);
 
     cout << "Account created!" << endl;
 
