@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "transaction.h"
+#include "../util/util.h"
 
 using namespace std;
 
@@ -49,6 +50,12 @@ int RefundTransaction::execute(TransactionFile tf, User* current_user, map<strin
     string input_amount;
     cout << "Please enter the amount to refund:" << endl;
     getline(cin, input_amount);
+
+    if(!util::isNumber(input_amount)){
+        cout << "Error: Invalid input" << endl;
+        return 5;
+    }
+
     double amount = atof(input_amount.c_str());
 
     if (amount <= 0){
