@@ -61,6 +61,8 @@ int BidTransaction::execute(TransactionFile tf, User* current_user, map<string, 
             return 4;
         }
     }
+
+    tf.write_bid(item, seller, current_user->username, amount);
     cout << "Bid entered!" <<endl;
 
     return 0;

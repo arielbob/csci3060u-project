@@ -20,9 +20,9 @@ int LogoutTransaction::execute(TransactionFile tf, User*& current_user, map<stri
 
     //daily transaction file on working
     current_user = NULL;
-    cout << "You have logged out" <<endl;
-    //
-    //TODO Logout transaction;
-    //
+    cout << "You have logged out" << endl;
+
+    tf.write_end_session();
+
     return 0;
 }

@@ -29,13 +29,10 @@ int DeleteTransaction::execute(TransactionFile tf, User* current_user, map<strin
     if(it == users.end()){
         cout << "Error: username could not found" << endl;
         return 2;
-    } else{
-        cout << "Account Delete Successful!" << endl;
-        return 0;
     }
-    //
-    // TODO delete transaction
-    //
 
-    return 1;
+    tf.write_delete_account(username);
+    cout << "Account Delete Successful!" << endl;
+
+    return 0;
 }

@@ -70,7 +70,7 @@ int RefundTransaction::execute(TransactionFile tf, User* current_user, map<strin
     }
 
     tf.write_refund(buyer, seller, amount);
-
     cout << "Refund successful!" << endl;
+
     return 0;
 }

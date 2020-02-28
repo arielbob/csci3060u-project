@@ -58,7 +58,8 @@ int AdvertiseTransaction::execute(TransactionFile tf, User* current_user, map<st
         return 4;
     }
 
-    cout <<"item advertised!" <<endl;
+    tf.write_advertise(item, current_user->username, numofdays, minbid);
+    cout << "item advertised!" <<endl;
 
     return 0;
 }

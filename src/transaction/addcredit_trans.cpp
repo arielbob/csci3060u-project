@@ -64,6 +64,8 @@ int AddCreditTransaction::execute(TransactionFile tf, User* current_user, map<st
         return 4;
     }
 
+    tf.write_add_credit(username, amount);
+
     cout << "Credit added!" << endl;
     return 0;
     //
