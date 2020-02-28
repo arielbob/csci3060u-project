@@ -1,2 +1,2 @@
-01 goodusername   AA 000000
+01 goodusername    AA 999999.00
 00                    000000000
