@@ -1,0 +1,5 @@
+delete [OK] available items file from expect output
+should be lower case for seller
+fix an issue that the expect output still outputs next question after error printed
+restruct expect output
+fix the issue that the expect output display ! after Error

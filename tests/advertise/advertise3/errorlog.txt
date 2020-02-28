@@ -1,0 +1,5 @@
+delete [OK] available items file from expect output
+should be lower case for buyer
+fix issue that the expect output shows seller
+fix the buyer is FS and cause infinite loop
+fix the upper case of the 

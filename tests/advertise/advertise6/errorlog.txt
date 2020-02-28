@@ -1,0 +1,7 @@
+delete [OK] available items file from expect output
+should be lower case for seller
+fix the issue that expect output using lower case of please
+restruct expect output
+fix the issue that the expect output display ! after Error
+fix the issue that missing Error when output error
+fix the issue that the Error message should start with upper case letter in the front end

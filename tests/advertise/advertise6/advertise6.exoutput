@@ -2,12 +2,15 @@ Welcome to CBay Auctioning System!
 Please enter a transaction:
 Please enter your username:
 Logged in.
-[OK] available items file
 
-Welcome Seller
+Welcome seller
 Please enter a transaction:
-please enter the item to advertise:
-please enter the minimum bid for the item:
-please enter the number of days until the auction end:
+Please enter the item to advertise:
+Please enter the minimum bid for the item:
+Please enter the number of days until the auction end:
+Error: Days of auction is too long
 
-Error! Days to auction is too long.
+Please enter a transaction:
+You have logged out
+
+Please enter a transaction:

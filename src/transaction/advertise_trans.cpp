@@ -12,7 +12,7 @@ bool AdvertiseTransaction::verify(User* user) {
         return false;
     }
 
-    if(user->user_type != "FS" && user->user_type != "BS"){
+    if(user->user_type != "FS" && user->user_type != "SS"){
         cout << "Error: prohibit to advertise item" << endl;
         return false;
     }
@@ -52,9 +52,9 @@ int AdvertiseTransaction::execute(TransactionFile tf, User* current_user, map<st
 
     cout << "Please enter the number of days until the auction end:" <<endl;
     getline(cin, input_days);
-    int numofdays = atoi(input_amount.c_str());
+    int numofdays = atoi(input_days.c_str());
     if (numofdays > 100){
-        cout <<"days of auction is too long\n";
+        cout <<"Error: Days of auction is too long\n";
         return 4;
     }
 

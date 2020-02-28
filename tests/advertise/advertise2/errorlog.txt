@@ -1,1 +1,4 @@
 delete [OK] available items file from expect output
+should be lower case for seller
+fix issue that expect output still print out next question when error occured
+fix issue that expect output prints lower case of p in please

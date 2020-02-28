@@ -1,4 +1,5 @@
-seller          FS 000000.00
-oldbuyer        FS 000000.00
-buyer           FS 000400.00
+user            FS 000000.00
+admin           AA 999999.00
+seller          SS 000000.00
+oldbuyer        AA 000000.00
 END                         
