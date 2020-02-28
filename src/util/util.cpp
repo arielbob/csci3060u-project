@@ -21,6 +21,7 @@ string util::trim_str(string str) {
     if (start > -1) {
         return str.substr(start, len);
     } else {
+        // FIXME (arielbob): I think we should return an empty string here instead
         return str;
     }
 }
