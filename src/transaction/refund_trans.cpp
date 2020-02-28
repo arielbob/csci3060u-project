@@ -68,9 +68,8 @@ int RefundTransaction::execute(TransactionFile tf, User* current_user, map<strin
         cout << "Error: Seller has insufficient funds for refund" << endl;
         return 5;
     }
-    //
-    //TODO refund
-    //
+
+    tf.write_refund(buyer, seller, amount);
 
     cout << "Refund successful!" << endl;
     return 0;

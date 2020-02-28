@@ -4,10 +4,9 @@
 00                    000000000
 05 buyer           seller          000050.00
 03 air jordans         seller          020 100.00
-04 air jordans         seller          buyer           200.00
+04 air jordans         seller          buyer           200.0000                    000000000
 00                    000000000
 00                    000000000
 00                    000000000
-00                    000000000
-00                    000000000
+05 buyer           admin           000100.00
 00                    000000000
