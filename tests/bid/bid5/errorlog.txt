@@ -1,0 +1,2 @@
+delete [OK] available items file from expect output
+restructure 

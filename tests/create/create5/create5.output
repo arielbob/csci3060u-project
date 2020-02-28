@@ -3,15 +3,14 @@ Please enter a transaction:
 Please enter your username:
 Logged in.
 
-Welcome buyer
+Welcome Admin
 Please enter a transaction:
-Please enter the item name:
-Please enter the seller's username:
-Current highest bid for guitar: $300
-Please enter a new bid amount:
-Bid entered!
+Error: Transaction not permitted for your user type
 
 Please enter a transaction:
-You have logged out
+Transaction Error
+
+Please enter a transaction:
+Transaction Error
 
 Please enter a transaction:

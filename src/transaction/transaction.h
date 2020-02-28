@@ -20,9 +20,10 @@
 * Class to represent a login transaction
 */
 class LoginTransaction {
+
+
     public:
         static bool verify(User* user);
-        //static bool isNumber(std::string &s);
         static int execute(TransactionFile tf, User*& user, std::map<std::string, User*> users);
 };
 

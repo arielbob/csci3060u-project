@@ -11,7 +11,7 @@ bool DeleteTransaction::verify(User* user) {
         cout << "Error: Not logged in" << endl;
         return false;
     } else if (user->user_type != "AA") {
-        cout << "Error: Prohibited to delete accounts" << endl;
+        cout << "Error: Transaction not permitted for your user type" << endl;
         return false;
     }
 

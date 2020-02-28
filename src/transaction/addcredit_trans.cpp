@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "transaction.h"
+#include "../util/util.h"
 
 using namespace std;
 
@@ -12,18 +13,13 @@ bool AddCreditTransaction::verify(User* user) {
     }
 
     if(user->user_type != "AA"){
-        cout << "Error: prohibit to add credit" <<  endl;
+        cout << "Error: Transaction not permitted for your user type" <<  endl;
         return false;
     }
 
     return true;
 }
 
-// bool AddCreditTransaction::isNumber(string& s) {
-//     const_iterator it = s.begin();
-//     while (it != s.end() && isdigit(*it)) ++it;
-//     return !s.empty() && it == s.end();
-// }
 
 int AddCreditTransaction::execute(TransactionFile tf, User* current_user, map<string, User*> users) {
     if (!verify(current_user)) return 1;
@@ -41,10 +37,11 @@ int AddCreditTransaction::execute(TransactionFile tf, User* current_user, map<st
     }
     cout << "Please enter the amount to add:" << endl;
     getline(cin, input_amount);
-    // if (!isNumber(input_amount)){
-    //     cout <<"Error: Invalid input\n";
-    //     return 5;
-    // }
+    if (!util::isNumber(input_amount)){
+        cout <<"Error: Invalid input\n";
+        return 5;
+    }
+
     double amount = atof(input_amount.c_str());
 
     if(amount > 1000.0){

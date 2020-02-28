@@ -45,6 +45,19 @@ string util::left_pad(string str, size_t len, char fill_char) {
     return ss.str();
 }
 
+bool util::isNumber(string input) {
+    int size = input.size();
+    for(int i = 0; i < size; i++){
+        if(!isdigit(input[i])){
+            if(input[i] == '.'){
+                continue;
+            }
+            return false;
+        }
+    }
+    return true;
+}
+
 /**
 * Pad a string from the right
 * @param str String to pad

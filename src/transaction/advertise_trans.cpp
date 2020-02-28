@@ -13,7 +13,7 @@ bool AdvertiseTransaction::verify(User* user) {
     }
 
     if(user->user_type != "FS" && user->user_type != "SS"){
-        cout << "Error: prohibit to advertise item" << endl;
+        cout << "Error: Transaction not permitted for your user type" << endl;
         return false;
     }
 

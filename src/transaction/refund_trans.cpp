@@ -12,7 +12,7 @@ bool RefundTransaction::verify(User* user) {
     }
 
     if(user->user_type != "AA"){
-        cout <<"Error: prohibit to process refund" << endl;
+        cout <<"Error: Transaction not permitted for your user type" << endl;
         return false;
     }
 

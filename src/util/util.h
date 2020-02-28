@@ -20,7 +20,8 @@ namespace util {
     * Create credit string from double
     */
     std::string credit_str(double credit, size_t len);
+
+    bool isNumber(std::string s);
 }
 
 #endif
-

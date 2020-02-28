@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "transaction.h"
+#include "../util/util.h"
 
 using namespace std;
 
@@ -12,8 +13,8 @@ bool BidTransaction::verify(User* user) {
     }
 
     // QUESTION: are admins allowed to bid?
-    if(user->user_type != "BS" && user->user_type != "FS"){
-        cout << "Error: prohibit to Bid item" <<  endl;
+    if(user->user_type != "BS" && user->user_type != "FS" && user->user_type != "AA"){
+        cout << "Error: Transaction not permitted for your user type" <<  endl;
         return false;
     }
 
@@ -36,20 +37,31 @@ int BidTransaction::execute(TransactionFile tf, User* current_user, map<string, 
     pair <string, string> item_seller = make_pair(item,seller);
     map<pair<string, string>, Item*>::iterator itemit = items.find(item_seller);
     if(itemit == items.end()){
-        cout << "Error: cannot find the items \n";
+        cout << "Error: Item not found" <<endl;
         return 2;
     } else {
         cout << "Current highest bid for "<<  item << ": $"<< itemit -> second -> current_bid -> amount << endl;
     }
     cout << "Please enter a new bid amount:" << endl;
+
     getline(cin, input_amount);
     double amount = atof(input_amount.c_str());
-    if (amount <= itemit -> second -> current_bid -> amount){
-        cout << "Error: Bid must be higher than current highest bid. \n";
-    } else if (amount < itemit -> second -> current_bid -> amount * 1.05){
-        cout << "Error: Bid must be at least 5% higher than current highest bid. \n";
+
+    if(!util::isNumber(input_amount)){
+        cout <<"Error: Invalid input\n";
+        return 5;
     }
-    cout << "bid entered";
+
+    if (amount <= itemit -> second -> current_bid -> amount){
+        cout << "Error: Bid must be higher than current highest bid\n";
+        return 3;
+    } else if (amount < itemit -> second -> current_bid -> amount * 1.05){
+        if (current_user -> user_type != "AA"){
+            cout << "Error: Bid must be at least 5% higher than current highest bid\n";
+            return 4;
+        }
+    }
+    cout << "Bid entered!" <<endl;
 
     return 0;
 }

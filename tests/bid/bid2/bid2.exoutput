@@ -2,11 +2,12 @@ Welcome to CBay Auctioning System!
 Please enter a transaction:
 Please enter your username:
 Logged in.
-[OK] available items file
 
 Welcome seller
 Please enter a transaction:
-Error: Transaction not permitted for your user type.
-Please enter a transaction:
+Error: Transaction not permitted for your user type
 
-Session terminated.
+Please enter a transaction:
+You have logged out
+
+Please enter a transaction:

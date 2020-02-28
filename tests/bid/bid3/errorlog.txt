@@ -1,0 +1,4 @@
+delete [OK] available items file from expect output
+change lowr case bid to upper case
+add a new line to Bid so it output better
+change the error output to Error: Item not found.
