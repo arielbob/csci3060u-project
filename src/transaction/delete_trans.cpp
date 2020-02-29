@@ -22,17 +22,17 @@ int DeleteTransaction::execute(TransactionFile tf, User* current_user, map<strin
     if (!verify(current_user)) return 1;
 
     string username;
-    cout << "Please enter the username:" << endl;
+    cout << "Please enter the username to delete:" << endl;
     getline(cin, username);
 
     map<string, User*>::iterator it = users.find(username);
     if(it == users.end()){
-        cout << "Error: username could not found" << endl;
+        cout << "Error: Username could not found" << endl;
         return 2;
     }
 
     tf.write_delete_account(username);
-    cout << "Account Delete Successful!" << endl;
+    cout << "Account delete successful!" << endl;
 
     return 0;
 }

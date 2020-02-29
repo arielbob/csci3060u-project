@@ -53,7 +53,7 @@ void TransactionFile::write_delete_account(std::string username) {
     ss << CODE_DELETE << " ";
     ss << util::right_pad(username, MAX_USERNAME_LENGTH, ' ') << " ";
     ss << "  " << " ";
-    ss << util::right_pad("", MAX_CREDIT_LENGTH, '0');
+    ss << util::credit_str(0, MAX_CREDIT_LENGTH);
     write_line(ss.str());
 }
 
