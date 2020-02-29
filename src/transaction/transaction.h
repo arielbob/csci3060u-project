@@ -8,20 +8,9 @@
 #include "../transactionfile/transactionfile.h"
 
 /**
-* Class to represent a transaction
-*/
-// class Transaction {
-//     public:
-//         std::unordered_set perm_user_types;
-//         bool is_permitted(User user);
-// };
-
-/**
 * Class to represent a login transaction
 */
 class LoginTransaction {
-
-
     public:
         static bool verify(User* user);
         static int execute(TransactionFile tf, User*& user, std::map<std::string, User*> users);

@@ -1,3 +1,10 @@
+/**
+* CSCI3060 Project Frontend
+* By: Ariel Bobadilla, Kelly Pham, Liangyu Zhao
+*
+* This program simulates an auctioning system.
+*/
+
 #include <iostream>
 #include <climits>
 #include <fstream>
@@ -16,12 +23,20 @@ using namespace std;
 
 User* current_user = NULL;
 
+/**
+* Process a transaction
+* @param transaction The transaction
+* @param users The users map generated from AccountsFile::read()
+* @param items The items map generated from ItemsFile::read()
+* @param tf The TransactionsFile object
+* @return A return code, 0 if successful, non-zero if an error occurs
+*/
 int processTransaction(
     string transaction,
     map<string, User*> users,
     map<pair<string, string>, Item*> items,
     TransactionFile& tf
-) {//it read in the User input and process to different cases
+) {
     string transactions[10] = {
         "login",
         "logout",
@@ -91,8 +106,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    // Read and parse the accounts file and items file
     map<string, User*> users = AccountsFile::read(argv[1]);
     map<pair<string, string>, Item*> items = ItemsFile::read(argv[2], users);
+    // Create a TransactionsFile object and open the transactions file
     TransactionFile tf;
     tf.open(argv[3]);
 
@@ -100,7 +117,6 @@ int main(int argc, char* argv[]) {
     while(1){
         string transaction;
         cout << "Please enter a transaction:" << endl;
-        // i changed it to getline is it can reading one line of transaction so Add Credit can be read
         getline(cin, transaction);
         processTransaction(transaction, users, items, tf);
         cout << endl;

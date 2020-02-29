@@ -6,13 +6,17 @@
 
 using namespace std;
 
+/**
+* Verifies a user can perform a transaction
+* @param user The user to verify
+* @return A boolean of whether or not the user is permitted to perform the transaction
+*/
 bool BidTransaction::verify(User* user) {
     if (!user) {
         cout << "Error: Not logged in" <<  endl;
         return false;
     }
 
-    // QUESTION: are admins allowed to bid?
     if(user->user_type != "BS" && user->user_type != "FS" && user->user_type != "AA"){
         cout << "Error: Transaction not permitted for your user type" <<  endl;
         return false;
@@ -21,6 +25,14 @@ bool BidTransaction::verify(User* user) {
     return true;
 }
 
+/**
+* Executes the bid transaction
+* @param tf The current transactions file
+* @param current_user The current user
+* @param users The users map
+* @param items The items map
+* @return A return code, 0 if successful, non-zero if an error occurs
+*/
 int BidTransaction::execute(TransactionFile tf, User* current_user, map<string, User*> users, map<pair<string, string>, Item*> items) {
     if (!verify(current_user)) return 1;
 
@@ -47,7 +59,7 @@ int BidTransaction::execute(TransactionFile tf, User* current_user, map<string, 
     getline(cin, input_amount);
     double amount = atof(input_amount.c_str());
 
-    if(!util::isNumber(input_amount)){
+    if(!util::is_number(input_amount)){
         cout <<"Error: Invalid input\n";
         return 5;
     }

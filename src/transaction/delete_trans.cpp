@@ -6,6 +6,11 @@
 
 using namespace std;
 
+/**
+* Verifies a user can perform a transaction
+* @param user The user to verify
+* @return A boolean of whether or not the user is permitted to perform the transaction
+*/
 bool DeleteTransaction::verify(User* user) {
     if (!user) {
         cout << "Error: Not logged in" << endl;
@@ -18,6 +23,13 @@ bool DeleteTransaction::verify(User* user) {
     return true;
 }
 
+/**
+* Executes the delete transaction
+* @param tf The current transactions file
+* @param current_user The current user
+* @param users The users map
+* @return A return code, 0 if successful, non-zero if an error occurs
+*/
 int DeleteTransaction::execute(TransactionFile tf, User* current_user, map<string, User*> users) {
     if (!verify(current_user)) return 1;
 

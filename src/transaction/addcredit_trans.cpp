@@ -6,8 +6,14 @@
 
 using namespace std;
 
+// map to hold how much credit has been added to each user in a session
 map<string, double> AddCreditTransaction::daily_max;
 
+/**
+* Verifies a user can perform a transaction
+* @param user The user to verify
+* @return A boolean of whether or not the user is permitted to perform the transaction
+*/
 bool AddCreditTransaction::verify(User* user) {
     if (!user) {
         cout << "Error: Not logged in" <<  endl;
@@ -17,6 +23,13 @@ bool AddCreditTransaction::verify(User* user) {
     return true;
 }
 
+/**
+* Executes the addcredit transaction
+* @param tf The current transactions file
+* @param current_user The current user
+* @param users The users map
+* @return A return code, 0 if successful, non-zero if an error occurs
+*/
 int AddCreditTransaction::execute(TransactionFile tf, User* current_user, map<string, User*> users) {
     if (!verify(current_user)) return 1;
 
@@ -38,7 +51,7 @@ int AddCreditTransaction::execute(TransactionFile tf, User* current_user, map<st
 
     cout << "Please enter the amount to add:" << endl;
     getline(cin, input_amount);
-    if (!util::isNumber(input_amount)){
+    if (!util::is_number(input_amount)){
         cout <<"Error: Invalid input\n";
         return 5;
     }

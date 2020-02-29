@@ -6,6 +6,11 @@
 
 using namespace std;
 
+/**
+* Verifies a user can perform a transaction
+* @param user The user to verify
+* @return A boolean of whether or not the user is permitted to perform the transaction
+*/
 bool AdvertiseTransaction::verify(User* user) {
     if (!user) {
         cout << "Error: Not logged in" << endl;
@@ -20,6 +25,14 @@ bool AdvertiseTransaction::verify(User* user) {
     return true;
 }
 
+/**
+* Executes the advertise transaction
+* @param tf The current transactions file
+* @param current_user The current user
+* @param users The users map
+* @param items The items map
+* @return A return code, 0 if successful, non-zero if an error occurs
+*/
 int AdvertiseTransaction::execute(TransactionFile tf, User* current_user, map<string, User*> users, map<pair<string, string>, Item*> items) {
     if (!verify(current_user)) return 1;
 

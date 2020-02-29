@@ -45,7 +45,12 @@ string util::left_pad(string str, size_t len, char fill_char) {
     return ss.str();
 }
 
-bool util::isNumber(string input) {
+/**
+* Checks if a string is a number
+* @param input String to check
+* @return Whether or not the string is a number
+*/
+bool util::is_number(string input) {
     int size = input.size();
     for(int i = 0; i < size; i++){
         if(!isdigit(input[i])){

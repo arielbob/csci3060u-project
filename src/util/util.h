@@ -20,8 +20,10 @@ namespace util {
     * Create credit string from double
     */
     std::string credit_str(double credit, size_t len);
-
-    bool isNumber(std::string s);
+    /*
+    * Checks if a string is a number
+    */
+    bool is_number(std::string s);
 }
 
 #endif
