@@ -31,6 +31,11 @@ int DeleteTransaction::execute(TransactionFile tf, User* current_user, map<strin
         return 2;
     }
 
+    if (username == current_user->username) {
+        cout << "Error: Cannot delete current user" << endl;
+        return 3;
+    }
+
     tf.write_delete_account(username);
     cout << "Account delete successful!" << endl;
 

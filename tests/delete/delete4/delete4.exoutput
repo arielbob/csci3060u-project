@@ -6,7 +6,7 @@ Logged in.
 Welcome admin
 Please enter a transaction:
 Please enter the username to delete:
-Account delete successful!
+Error: Cannot delete current user
 
 Please enter a transaction:
 You have logged out
