@@ -2,16 +2,18 @@ Welcome to CBay Auctioning System!
 Please enter a transaction:
 Please enter your username:
 Logged in.
-[OK] available items file
 
-Welcome Admin
-please enter transaction:
-please enter username to delete:
-
-username deleted!
+Welcome admin
+Please enter a transaction:
+Please enter the username to delete:
+Account delete successful!
 
 Please enter a transaction:
 Please enter the item name:
 Please enter the seller's username:
+Error: Item not found
 
-Error! Seller's Account deleted
+Please enter a transaction:
+You have logged out
+
+Please enter a transaction:
